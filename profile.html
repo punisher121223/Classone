@@ -7,17 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="date-time">📅 تاریخ: <span id="jalaliDate"></span></div>
+    <div class="container slide-in">
         <h2>پروفایل من 👤</h2>
         <div class="profile-box">
-            <label>نام: <input type="text" id="firstName" placeholder="نام خودت رو بنویس"></label>
-            <label>نام خانوادگی: <input type="text" id="lastName" placeholder="نام خانوادگیت رو بنویس"></label>
-            <button onclick="saveProfile()">ذخیره کن 🌈</button>
+            <div class="profile-row">
+                <label>نام: <input type="text" id="firstName" placeholder="نام خودت رو بنویس"></label>
+                <label>نام خانوادگی: <input type="text" id="lastName" placeholder="نام خانوادگیت رو بنویس"></label>
+            </div>
+            <div class="profile-row">
+                <label>عکس: <input type="file" id="profilePic" accept="image/*"></label>
+                <img id="profileImage" src="" alt="عکس پروفایل" style="display:none; max-width:100px;">
+            </div>
+            <button onclick="saveProfile()">ذخیره 🌈</button>
+            <button onclick="editProfile()" id="editBtn" style="display:none;">ویرایش ✏️</button>
             <p id="profileInfo"></p>
+            <button onclick="window.location.href='payment.html'">خرید بسته‌های آموزشی 💰</button>
+            <button onclick="showUsers()" id="showUsersBtn" style="display:none;">نمایش کاربران 👥</button>
+            <div id="userList"></div>
             <button onclick="logout()" class="logout-btn">خروج 🚪</button>
         </div>
         <button onclick="window.location.href='lessons.html'" class="back-btn">برگشت به دروس 📚</button>
+        <button onclick="window.location.href='index.html'" class="back-btn">برگشت به صفحه لاگین 🏠</button>
     </div>
+    <div class="footer">تمام حقوق این سایت متعلق به علیرضا جعفری رودباری (آموزگار پایه اول ابتدایی) می‌باشد. شماره تماس: ۰۹۹۶۱۱۳۰۷۸۷ | آیدی تلگرام: @alireza_teacher</div>
+    <div class="support"><a href="https://t.me/alireza_teacher" target="_blank">📞 ارتباط با پشتیبانی</a></div>
     <script src="script.js"></script>
 </body>
 </html>
