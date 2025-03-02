@@ -6,7 +6,12 @@
 body {
     background: linear-gradient(to bottom, #ffeb3b, #ff9800);
     margin: 0;
+    padding: 0;
     overflow: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @font-face {
@@ -16,23 +21,25 @@ body {
 
 .date-time {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 1vw;
+    left: 1vw;
     background: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5vw 1vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
+    font-size: 1vw;
 }
 
 .login-container, .container {
     background: #fff;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 700px;
+    padding: 2vw;
+    border-radius: 2vw;
+    box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
+    width: 90vw;
+    max-width: 700px;
     text-align: center;
-    margin: 50px auto;
-    border: 3px solid #ff5722;
+    margin: 5vh auto;
+    border: 0.3vw solid #ff5722;
 }
 
 .slide-in {
@@ -40,41 +47,41 @@ body {
 }
 
 @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
+    from { transform: translateY(-5vh); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
 .login-box, .profile-box {
     background: #e0f7fa;
-    padding: 15px;
-    border-radius: 15px;
-    margin-top: 20px;
+    padding: 1.5vw;
+    border-radius: 1.5vw;
+    margin-top: 2vh;
 }
 
 .profile-row {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 1vh 0;
 }
 
 .profile-row label {
     flex: 1;
-    margin: 0 10px;
+    margin: 0 1vw;
 }
 
 h2, h3 {
     color: #ff5722;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 2vh;
 }
 
 input, button {
     display: inline-block;
-    margin: 10px 5px;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 2px solid #ff9800;
+    margin: 1vh 0.5vw;
+    padding: 1.2vw;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    border-radius: 1vw;
+    border: 0.2vw solid #ff9800;
 }
 
 button {
@@ -90,16 +97,16 @@ button:hover {
 
 .profile-btn {
     background: #4caf50;
-    padding: 10px;
+    padding: 1vw;
     color: white;
     text-decoration: none;
-    border-radius: 10px;
-    margin: 5px;
+    border-radius: 1vw;
+    margin: 0.5vh;
 }
 
 .back-btn {
     background: #2196f3;
-    margin: 10px;
+    margin: 1vh;
 }
 
 .logout-btn {
@@ -108,73 +115,74 @@ button:hover {
 
 #lessonList button, #topics button {
     background: #ff9800;
-    margin: 5px;
-    padding: 15px;
-    font-size: 18px;
+    margin: 0.5vh;
+    padding: 1.5vw;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
 }
 
 .exercise-controls {
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .dropzone {
-    width: 300px;
-    height: 60px;
-    border: 3px dashed #ff5722;
+    width: clamp(50px, 10vw, 100px);
+    height: clamp(50px, 10vw, 100px);
+    border: 0.3vw dashed #ff5722;
     display: inline-block;
-    margin: 10px;
+    margin: 1vw;
     background: #fff3e0;
-    border-radius: 10px;
+    border-radius: 1vw;
     text-align: center;
-    line-height: 60px;
+    line-height: clamp(50px, 10vw, 100px);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
 span[draggable] {
-    padding: 10px;
-    margin: 5px;
+    padding: 1vw;
+    margin: 0.5vh;
     background: #ffeb3b;
     cursor: move;
-    border-radius: 10px;
-    border: 2px solid #ff9800;
-    font-size: 18px;
+    border-radius: 1vw;
+    border: 0.2vw solid #ff9800;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
 #exercise-panel {
     background: #e0f7fa;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    border: 2px solid #ff9800;
+    padding: 2vw;
+    border-radius: 1.5vw;
+    margin-top: 2vh;
+    border: 0.2vw solid #ff9800;
 }
 
 .footer {
     text-align: center;
-    padding: 10px;
+    padding: 1vh;
     background: #fff;
-    border-top: 2px solid #ff5722;
-    position: fixed;
-    bottom: 0;
+    border-top: 0.2vw solid #ff5722;
     width: 100%;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
 
 .support {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 2vh;
+    right: 2vw;
     background: #4caf50;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 1vw;
+    border-radius: 1vw;
 }
 
 .support a {
     color: white;
     text-decoration: none;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
 
 .package-box {
-    padding: 20px;
-    margin: 10px;
-    border-radius: 15px;
+    padding: 2vw;
+    margin: 1vh;
+    border-radius: 1.5vw;
     color: white;
     cursor: pointer;
     transition: transform 0.3s;
