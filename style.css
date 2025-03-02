@@ -5,10 +5,6 @@
 
 body {
     background: linear-gradient(to bottom, #ffeb3b, #ff9800);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     overflow: auto;
 }
@@ -18,14 +14,34 @@ body {
     src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff');
 }
 
+.date-time {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 .login-container, .container {
     background: #fff;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 600px;
+    width: 700px;
     text-align: center;
+    margin: 50px auto;
     border: 3px solid #ff5722;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .login-box, .profile-box {
@@ -33,6 +49,17 @@ body {
     padding: 15px;
     border-radius: 15px;
     margin-top: 20px;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.profile-row label {
+    flex: 1;
+    margin: 0 10px;
 }
 
 h2, h3 {
@@ -72,7 +99,7 @@ button:hover {
 
 .back-btn {
     background: #2196f3;
-    margin-top: 20px;
+    margin: 10px;
 }
 
 .logout-btn {
@@ -86,14 +113,20 @@ button:hover {
     font-size: 18px;
 }
 
+.exercise-controls {
+    margin-top: 20px;
+}
+
 .dropzone {
-    width: 250px;
+    width: 300px;
     height: 60px;
     border: 3px dashed #ff5722;
     display: inline-block;
     margin: 10px;
     background: #fff3e0;
     border-radius: 10px;
+    text-align: center;
+    line-height: 60px;
 }
 
 span[draggable] {
@@ -113,3 +146,44 @@ span[draggable] {
     margin-top: 20px;
     border: 2px solid #ff9800;
 }
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-top: 2px solid #ff5722;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.support {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.support a {
+    color: white;
+    text-decoration: none;
+}
+
+.package-box {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.package-box:hover {
+    transform: scale(1.05);
+}
+
+.blue { background: #2196f3; }
+.orange { background: #ff9800; }
+.gold { background: #ffd700; }
