@@ -28,66 +28,153 @@ function checkMedals(score) {
 // صدای تشویق
 const cheerSound = new Audio("assets/cheer.mp3");
 
-// داده‌های دروس
+// داده‌های دروس (کامل شده بر اساس کتاب‌های نگارش و ریاضی کلاس اول)
 const lessons = {
     "نگارش": {
-        "نگاره ۱": Array.from({ length: 100 }, (_, i) => {
-            if (i === 0) return `
-تمرین: "آب" را بخش کن 💧 (۲ بخش)
-<div class="dropzone" ondrop="drop(event, 'آ-ب')" ondragover="allowDrop(event)"></div>
-<div class="dropzone" ondrop="drop(event, 'آ-ب')" ondragover="allowDrop(event)"></div>
-<span draggable="true" ondragstart="drag(event)">آ</span>
-<span draggable="true" ondragstart="drag(event)">ب</span>
-`;
-            if (i === 1) return `
-تمرین: صدای "آ" را پیدا کن 🎵
-<div class="option" onclick="checkAnswer(this, 'آ')">آ</div><div class="option" onclick="checkAnswer(this, 'آ')">ا</div>
-`;
-            return `
-تمرین ${i + 1}: کدام کلمه درست است؟
-<div class="option" onclick="checkAnswer(this, 'آب')">آب</div><div class="option" onclick="checkAnswer(this, 'آد')">آد</div>
-`;
-        }),
-        "نگاره ۲": Array.from({ length: 100 }, (_, i) => {
-            if (i === 0) return `
-تمرین: "اسب" را بخش کن 🐴 (۲ بخش)
-<div class="dropzone" ondrop="drop(event, 'اَس-ب')" ondragover="allowDrop(event)"></div>
-<div class="dropzone" ondrop="drop(event, 'اَس-ب')" ondragover="allowDrop(event)"></div>
-<span draggable="true" ondragstart="drag(event)">اَس</span>
-<span draggable="true" ondragstart="drag(event)">ب</span>
-`;
-            return `
-تمرین ${i + 1}: کدام کلمه درست است؟
-<div class="option" onclick="checkAnswer(this, 'اسب')">اسب</div><div class="option" onclick="checkAnswer(this, 'اسد')">اسد</div>
-`;
-        }),
+        "نگاره ۱": [
+            `تمرین: "آب" را بخش کن 💧
+            <div class="dropzone" ondrop="drop(event, 'آ')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ب')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">آ</span>
+            <span draggable="true" ondragstart="drag(event)">ب</span>`,
+            `تمرین: صدای "آ" را پیدا کن 🎵
+            <div class="option" onclick="checkAnswer(this, 'آ')">آ</div><div class="option" onclick="checkAnswer(this, 'ب')">ب</div>`
+        ],
+        "نگاره ۲": [
+            `تمرین: "اسب" را بخش کن 🐴
+            <div class="dropzone" ondrop="drop(event, 'اَس')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ب')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">اَس</span>
+            <span draggable="true" ondragstart="drag(event)">ب</span>`,
+            `تمرین: کدام کلمه درست است؟
+            <div class="option" onclick="checkAnswer(this, 'اسب')">اسب</div><div class="option" onclick="checkAnswer(this, 'اسد')">اسد</div>`
+        ],
+        "نگاره ۳": [
+            `تمرین: "بابا" را بخش کن 👨
+            <div class="dropzone" ondrop="drop(event, 'با')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'با')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">با</span>
+            <span draggable="true" ondragstart="drag(event)">با</span>`,
+            `تمرین: صدای "ب" را پیدا کن 🎵
+            <div class="option" onclick="checkAnswer(this, 'ب')">ب</div><div class="option" onclick="checkAnswer(this, 'د')">د</div>`
+        ],
+        "نگاره ۴": [
+            `تمرین: "مادر" را بخش کن 👩
+            <div class="dropzone" ondrop="drop(event, 'ما')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'در')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">ما</span>
+            <span draggable="true" ondragstart="drag(event)">در</span>`,
+            `تمرین: کدام کلمه درست است؟
+            <div class="option" onclick="checkAnswer(this, 'مادر')">مادر</div><div class="option" onclick="checkAnswer(this, 'مارد')">مارد</div>`
+        ],
+        "نگاره ۵": [
+            `تمرین: "نان" را بخش کن 🍞
+            <div class="dropzone" ondrop="drop(event, 'نا')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ن')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">نا</span>
+            <span draggable="true" ondragstart="drag(event)">ن</span>`,
+            `تمرین: صدای "ن" را پیدا کن 🎵
+            <div class="option" onclick="checkAnswer(this, 'ن')">ن</div><div class="option" onclick="checkAnswer(this, 'م')">م</div>`
+        ],
+        "نگاره ۶": [
+            `تمرین: "دوست" را بخش کن 🤝
+            <div class="dropzone" ondrop="drop(event, 'دو')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ست')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">دو</span>
+            <span draggable="true" ondragstart="drag(event)">ست</span>`,
+            `تمرین: کدام کلمه درست است؟
+            <div class="option" onclick="checkAnswer(this, 'دوست')">دوست</div><div class="option" onclick="checkAnswer(this, 'دوس')">دوس</div>`
+        ],
+        "نگاره ۷": [
+            `تمرین: "مدرسه" را بخش کن 🏫
+            <div class="dropzone" ondrop="drop(event, 'مد')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ر')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'سه')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">مد</span>
+            <span draggable="true" ondragstart="drag(event)">ر</span>
+            <span draggable="true" ondragstart="drag(event)">سه</span>`,
+            `تمرین: صدای "س" را پیدا کن 🎵
+            <div class="option" onclick="checkAnswer(this, 'س')">س</div><div class="option" onclick="checkAnswer(this, 'ش')">ش</div>`
+        ],
+        "نگاره ۸": [
+            `تمرین: "کتاب" را بخش کن 📖
+            <div class="dropzone" ondrop="drop(event, 'ک')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'تا')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ب')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">ک</span>
+            <span draggable="true" ondragstart="drag(event)">تا</span>
+            <span draggable="true" ondragstart="drag(event)">ب</span>`,
+            `تمرین: کدام کلمه درست است؟
+            <div class="option" onclick="checkAnswer(this, 'کتاب')">کتاب</div><div class="option" onclick="checkAnswer(this, 'کتا')">کتا</div>`
+        ],
+        "نگاره ۹": [
+            `تمرین: "خورشید" را بخش کن ☀️
+            <div class="dropzone" ondrop="drop(event, 'خور')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'شید')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">خور</span>
+            <span draggable="true" ondragstart="drag(event)">شید</span>`,
+            `تمرین: صدای "خ" را پیدا کن 🎵
+            <div class="option" onclick="checkAnswer(this, 'خ')">خ</div><div class="option" onclick="checkAnswer(this, 'ح')">ح</div>`
+        ],
+        "نگاره ۱۰": [
+            `تمرین: "پرنده" را بخش کن 🐦
+            <div class="dropzone" ondrop="drop(event, 'پر')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ن')" ondragover="allowDrop(event)"></div>
+            <div class="dropzone" ondrop="drop(event, 'ده')" ondragover="allowDrop(event)"></div>
+            <span draggable="true" ondragstart="drag(event)">پر</span>
+            <span draggable="true" ondragstart="drag(event)">ن</span>
+            <span draggable="true" ondragstart="drag(event)">ده</span>`,
+            `تمرین: کدام کلمه درست است؟
+            <div class="option" onclick="checkAnswer(this, 'پرنده')">پرنده</div><div class="option" onclick="checkAnswer(this, 'پرند')">پرند</div>`
+        ]
     },
     "ریاضی": {
-        "تم ۱": Array.from({ length: 100 }, (_, i) => i === 0 ? `
-تمرین: ۲ + ۳ = ? ➕
-<div class="option" onclick="checkAnswer(this, '۵')">۵</div><div class="option" onclick="checkAnswer(this, '۴')">۴</div>
-` : `
-تمرین ${i + 1}: ۱ + ۲ = ? ➕
-<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>
-`),
+        "تم ۱ - شمارش": [
+            `تمرین: تعداد سیب‌ها را بشمار 🍎🍎🍎
+            <div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>`,
+            `تمرین: چند ستاره می‌بینی؟ ⭐⭐
+            <div class="option" onclick="checkAnswer(this, '۲')">۲</div><div class="option" onclick="checkAnswer(this, '۳')">۳</div>`
+        ],
+        "تم ۲ - جمع": [
+            `تمرین: ۲ + ۳ = ? ➕
+            <div class="option" onclick="checkAnswer(this, '۵')">۵</div><div class="option" onclick="checkAnswer(this, '۴')">۴</div>`,
+            `تمرین: ۱ + ۴ = ? ➕
+            <div class="option" onclick="checkAnswer(this, '۵')">۵</div><div class="option" onclick="checkAnswer(this, '۶')">۶</div>`
+        ],
+        "تم ۳ - تفریق": [
+            `تمرین: ۵ - ۲ = ? ➖
+            <div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۴')">۴</div>`,
+            `تمرین: ۴ - ۱ = ? ➖
+            <div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>`
+        ],
+        "تم ۴ - مقایسه": [
+            `تمرین: کدام بیشتر است؟ 🍎🍎 یا 🍎🍎🍎
+            <div class="option" onclick="checkAnswer(this, '🍎🍎🍎')">🍎🍎🍎</div><div class="option" onclick="checkAnswer(this, '🍎🍎')">🍎🍎</div>`,
+            `تمرین: کدام کمتر است؟ ⭐⭐⭐ یا ⭐⭐
+            <div class="option" onclick="checkAnswer(this, '⭐⭐')">⭐⭐</div><div class="option" onclick="checkAnswer(this, '⭐⭐⭐')">⭐⭐⭐</div>`
+        ],
+        "تم ۵ - شکل‌ها": [
+            `تمرین: کدام دایره است؟ 🔴
+            <div class="option" onclick="checkAnswer(this, '🔴')">🔴</div><div class="option" onclick="checkAnswer(this, '🔲')">🔲</div>`,
+            `تمرین: کدام مربع است؟ 🔲
+            <div class="option" onclick="checkAnswer(this, '🔲')">🔲</div><div class="option" onclick="checkAnswer(this, '🔴')">🔴</div>`
+        ]
     },
     "علوم": {
-        "درس ۱": Array.from({ length: 10 }, (_, i) => i === 0 ? `
-تمرین: کدام حیوان پرنده است؟ 🐦
-<div class="option" onclick="checkAnswer(this, 'پرنده')">پرنده</div><div class="option" onclick="checkAnswer(this, 'گربه')">گربه</div>
-` : `
-تمرین ${i + 1}: آب چه رنگی است؟
-<div class="option" onclick="checkAnswer(this, 'بی‌رنگ')">بی‌رنگ</div><div class="option" onclick="checkAnswer(this, 'قرمز')">قرمز</div>
-`),
+        "درس ۱": [
+            `تمرین: کدام حیوان پرنده است؟ 🐦
+            <div class="option" onclick="checkAnswer(this, 'پرنده')">پرنده</div><div class="option" onclick="checkAnswer(this, 'گربه')">گربه</div>`,
+            `تمرین: آب چه رنگی است؟
+            <div class="option" onclick="checkAnswer(this, 'بی‌رنگ')">بی‌رنگ</div><div class="option" onclick="checkAnswer(this, 'قرمز')">قرمز</div>`
+        ]
     },
     "بازی": {
-        "بازی ۱": Array.from({ length: 10 }, (_, i) => i === 0 ? `
-بازی: سیب‌ها را بشمار 🍎🍎🍎
-<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>
-` : `
-بازی ${i + 1}: ستاره‌ها را بشمار ⭐⭐⭐⭐
-<div class="option" onclick="checkAnswer(this, '۴')">۴</div><div class="option" onclick="checkAnswer(this, '۳')">۳</div>
-`),
+        "بازی ۱": [
+            `بازی: سیب‌ها را بشمار 🍎🍎🍎
+            <div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>`,
+            `بازی: ستاره‌ها را بشمار ⭐⭐⭐⭐
+            <div class="option" onclick="checkAnswer(this, '۴')">۴</div><div class="option" onclick="checkAnswer(this, '۳')">۳</div>`
+        ]
     }
 };
 
@@ -118,26 +205,25 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
     }
 });
 
-if ((window.location.pathname.includes("lessons.html") || window.location.pathname.includes("profile.html") || window.location.pathname.includes("payment.html") || window.location.pathname.includes("vocabulary.html")) && !localStorage.getItem("loggedIn")) {
+if ((window.location.pathname.includes("lessons.html") || window.location.pathname.includes("profile.html") || window.location.pathname.includes("payment.html") || window.location.pathname.includes("vocabulary.html") || window.location.pathname.includes("exercise.html")) && !localStorage.getItem("loggedIn")) {
     window.location.href = "./login.html";
 }
 
 // نمایش فهرست موضوعات
 function showTopics(lesson) {
-    resetPanel();
     const topicsDiv = document.getElementById("topics");
-    topicsDiv.innerHTML = "<button onclick=\"resetPanel();document.getElementById('topics').innerHTML=''\">برگشت به دروس 📚</button>";
+    topicsDiv.innerHTML = "<button onclick=\"document.getElementById('topics').innerHTML=''\">برگشت به دروس 📚</button>";
     for (let topic in lessons[lesson]) {
         const btn = document.createElement("button");
         btn.textContent = topic;
-        btn.onclick = () => showExercises(lesson, topic, getProgress(lesson, topic));
+        btn.onclick = () => openExerciseWindow(lesson, topic, getProgress(lesson, topic));
         topicsDiv.appendChild(btn);
     }
+    updateProgressBar(lesson, Object.keys(lessons[lesson])[0]);
 }
 
-// نمایش تمرین‌ها
-let currentLesson, currentTopic;
-function showExercises(lesson, topic, index) {
+// باز کردن تمرین در پنجره جدید
+function openExerciseWindow(lesson, topic, index) {
     const username = localStorage.getItem("loggedIn");
     const package = JSON.parse(localStorage.getItem("package_" + username));
     const progress = getProgress(lesson, topic);
@@ -149,19 +235,27 @@ function showExercises(lesson, topic, index) {
         showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.", () => window.location.href = "./payment.html");
         return;
     }
+    window.open(`exercise.html?lesson=${lesson}&topic=${topic}&index=${index}`, "_blank", "width=1000,height=600");
+}
 
+// نمایش تمرین‌ها در صفحه exercise.html
+if (window.location.pathname.includes("exercise.html")) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lesson = urlParams.get("lesson");
+    const topic = urlParams.get("topic");
+    const index = parseInt(urlParams.get("index"));
+    showExercise(lesson, topic, index);
+}
+
+function showExercise(lesson, topic, index) {
     const exerciseDiv = document.getElementById("exercise-panel");
-    exerciseDiv.innerHTML = "";
     if (index >= lessons[lesson][topic].length) {
         exerciseDiv.innerHTML = "<p>تمرین‌ها تمام شد! 🎉</p>";
+        setTimeout(() => window.close(), 2000);
         return;
     }
     exerciseDiv.innerHTML = lessons[lesson][topic][index];
-    currentLesson = lesson;
-    currentTopic = topic;
     saveProgress(lesson, topic, index);
-    updateProgressBar(lesson, topic);
-    document.getElementById("checkAnswerBtn").style.display = "block";
 }
 
 // نوار پیشرفت
@@ -169,13 +263,8 @@ function updateProgressBar(lesson, topic) {
     const progress = getProgress(lesson, topic);
     const total = lessons[lesson][topic].length;
     const percentage = (progress / total) * 100;
-    document.getElementById("progressFill").style.width = `${percentage}%`;
-}
-
-// بازنشانی پنل تمرین‌ها
-function resetPanel() {
-    document.getElementById("exercise-panel").innerHTML = "";
-    document.getElementById("checkAnswerBtn").style.display = "none";
+    const progressFill = document.getElementById("progressFill");
+    if (progressFill) progressFill.style.width = `${percentage}%`;
 }
 
 // ذخیره و بازیابی پیشرفت
@@ -193,50 +282,46 @@ function getProgress(lesson, topic) {
     return progress[lesson]?.[topic] || 0;
 }
 
-function resetProgress() {
-    const username = localStorage.getItem("loggedIn");
-    let progress = JSON.parse(localStorage.getItem("progress_" + username)) || {};
-    progress[currentLesson][currentTopic] = 0;
-    localStorage.setItem("progress_" + username, JSON.stringify(progress));
-    showExercises(currentLesson, currentTopic, 0);
-}
-
-// تمرین بعدی
-function nextExercise() {
-    let index = getProgress(currentLesson, currentTopic) + 1;
-    showExercises(currentLesson, currentTopic, index);
-}
-
-// بررسی پاسخ‌ها
+// بررسی پاسخ‌ها و انتقال خودکار
 function checkAnswer(element, correctAnswer) {
     const userAnswer = element.textContent;
+    const lesson = new URLSearchParams(window.location.search).get("lesson");
+    const topic = new URLSearchParams(window.location.search).get("topic");
+    let index = parseInt(new URLSearchParams(window.location.search).get("index"));
     if (userAnswer === correctAnswer) {
         cheerSound.play();
-        showAlert("درست است! 🌟", nextExercise);
         updateScore(5);
+        showAlert("درست است! 🌟", () => {
+            index++;
+            window.location.href = `exercise.html?lesson=${lesson}&topic=${topic}&index=${index}`;
+        });
     } else {
         showAlert("غلط است، دوباره تلاش کن! 😔");
     }
 }
 
-function checkAllAnswers() {
-    const exerciseDiv = document.getElementById("exercise-panel");
-    const dropzones = exerciseDiv.querySelectorAll(".dropzone");
-    const options = exerciseDiv.querySelectorAll(".option");
-    if (dropzones.length > 0) {
-        const droppedItems = Array.from(dropzones).map(zone => Array.from(zone.children).map(item => item.textContent).join("")).join("-");
-        const correctOrder = dropzones[0].getAttribute("ondrop").match(/'(.*?)'/)[1];
-        if (droppedItems === correctOrder) {
-            cheerSound.play();
-            showAlert("درست است! 🌟", nextExercise);
-            updateScore(5);
-        } else {
-            showAlert("ترتیب اشتباه است، دوباره تلاش کن! 😔");
-        }
-    } else if (options.length > 0) {
-        options.forEach(opt => {
-            const correct = opt.getAttribute("onclick").match(/'(.*?)'/)[1];
-            if (opt.textContent === correct) opt.click();
+function drop(event, correctAnswer) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const draggedElement = document.createElement("span");
+    draggedElement.textContent = data;
+    draggedElement.draggable = true;
+    draggedElement.ondragstart = drag;
+    event.target.appendChild(draggedElement);
+
+    const lesson = new URLSearchParams(window.location.search).get("lesson");
+    const topic = new URLSearchParams(window.location.search).get("topic");
+    let index = parseInt(new URLSearchParams(window.location.search).get("index"));
+    const dropzones = document.querySelectorAll(".dropzone");
+    const droppedItems = Array.from(dropzones).map(zone => Array.from(zone.children).map(item => item.textContent).join("")).join("");
+    const correctOrder = Array.from(dropzones).map(zone => zone.getAttribute("ondrop").match(/'(.*?)'/)[1]).join("");
+
+    if (droppedItems === correctOrder) {
+        cheerSound.play();
+        updateScore(5);
+        showAlert("درست است! 🌟", () => {
+            index++;
+            window.location.href = `exercise.html?lesson=${lesson}&topic=${topic}&index=${index}`;
         });
     }
 }
@@ -248,16 +333,6 @@ function allowDrop(event) {
 
 function drag(event) {
     event.dataTransfer.setData("text", event.target.textContent);
-}
-
-function drop(event, correctOrder) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const draggedElement = document.createElement("span");
-    draggedElement.textContent = data;
-    draggedElement.draggable = true;
-    draggedElement.ondragstart = drag;
-    event.target.appendChild(draggedElement);
 }
 
 // نمایش پیام با دکمه
@@ -331,7 +406,7 @@ if (window.location.pathname.includes("profile.html")) {
         document.getElementById("profileImage").style.display = "block";
         document.getElementById("profilePic").disabled = true;
     }
-    if (localStorage.getItem("isAdmin") === "true") {
+    if (username === "alireza" && localStorage.getItem("isAdmin") === "true") {
         document.getElementById("showUsersBtn").style.display = "inline-block";
     }
 }
@@ -372,7 +447,7 @@ function showUsers() {
 }
 
 function activatePackage(username) {
-    if (localStorage.getItem("loggedIn") !== "alireza") {
+    if (localStorage.getItem("loggedIn") !== "alireza" || localStorage.getItem("isAdmin") !== "true") {
         showAlert("فقط مدیر می‌تواند بسته‌ها را تغییر دهد!");
         return;
     }
@@ -387,7 +462,7 @@ function activatePackage(username) {
 }
 
 function deleteUser(username) {
-    if (localStorage.getItem("loggedIn") !== "alireza") {
+    if (localStorage.getItem("loggedIn") !== "alireza" || localStorage.getItem("isAdmin") !== "true") {
         showAlert("فقط مدیر می‌تواند کاربران را حذف کند!");
         return;
     }
@@ -404,7 +479,7 @@ function deleteUser(username) {
 }
 
 function deleteAllUsers() {
-    if (localStorage.getItem("loggedIn") !== "alireza") {
+    if (localStorage.getItem("loggedIn") !== "alireza" || localStorage.getItem("isAdmin") !== "true") {
         showAlert("فقط مدیر می‌تواند همه کاربران را حذف کند!");
         return;
     }
@@ -420,7 +495,7 @@ function deleteAllUsers() {
 }
 
 function resetUserProgress(username) {
-    if (localStorage.getItem("loggedIn") !== "alireza") {
+    if (localStorage.getItem("loggedIn") !== "alireza" || localStorage.getItem("isAdmin") !== "true") {
         showAlert("فقط مدیر می‌تواند پیشرفت را بازنشانی کند!");
         return;
     }
