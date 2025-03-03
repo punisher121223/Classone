@@ -31,7 +31,7 @@ body {
     z-index: 100;
 }
 
-.login-container, .container {
+.login-container, .container, .exercise-container {
     background: #fff;
     padding: 2vw;
     border-radius: 1.5vw;
@@ -42,6 +42,11 @@ body {
     margin: 5vh auto;
     border: 0.2vw solid #2196f3;
     animation: slideIn 0.5s ease-in-out;
+}
+
+.exercise-container {
+    max-width: 1000px;
+    margin: 2vh auto;
 }
 
 @keyframes slideIn {
@@ -134,7 +139,7 @@ button:hover {
     background: #d32f2f;
 }
 
-#lessonList button, #topics button {
+.lesson-list button, .topics-list button {
     background: #42a5f5;
     margin: 0.5vh;
     padding: 1.2vw;
@@ -142,44 +147,37 @@ button:hover {
     border-radius: 0.8vw;
 }
 
-.exercise-controls {
+.exercise-panel {
+    background: #f1faff;
+    padding: 3vw;
+    border-radius: 1vw;
     margin-top: 2vh;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1vw;
-    justify-content: center;
+    border: 0.1vw solid #bbdefb;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .dropzone {
-    width: clamp(80px, 15vw, 150px);
-    height: clamp(80px, 15vw, 150px);
+    width: clamp(120px, 20vw, 200px);
+    height: clamp(120px, 20vw, 200px);
     border: 0.3vw dashed #2196f3;
     display: inline-block;
-    margin: 1vw;
+    margin: 2vw;
     background: #e3f2fd;
     border-radius: 1vw;
     text-align: center;
-    line-height: clamp(80px, 15vw, 150px);
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: clamp(120px, 20vw, 200px);
+    font-size: clamp(1.5rem, 2vw, 2rem);
 }
 
 span[draggable], .option {
-    padding: 1vw;
-    margin: 0.5vh;
+    padding: 1.5vw;
+    margin: 1vh;
     background: #bbdefb;
     cursor: pointer;
     border-radius: 0.8vw;
     border: 0.2vw solid #42a5f5;
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     display: inline-block;
-}
-
-#exercise-panel {
-    background: #f1faff;
-    padding: 2vw;
-    border-radius: 1vw;
-    margin-top: 2vh;
-    border: 0.1vw solid #bbdefb;
 }
 
 .footer {
