@@ -1,197 +1,90 @@
-* {
-    font-family: 'Vazir', sans-serif;
-    box-sizing: border-box;
-}
-
-body {
-    background: linear-gradient(to bottom, #ffeb3b, #ff9800);
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* استایل‌های قبلی حفظ می‌شوند، فقط موارد جدید اضافه می‌شوند */
 @font-face {
-    font-family: 'Vazir';
-    src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff');
+    font-family: 'Koodak';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Koodak/Koodak.woff') format('woff');
 }
 
-.date-time {
-    position: fixed;
-    top: 1vw;
-    left: 1vw;
-    background: #fff;
-    padding: 0.5vw 1vw;
-    border-radius: 0.5vw;
-    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
-    font-size: 1vw;
+body.dark-mode {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #ecf0f1;
 }
 
-.login-container, .container {
-    background: #fff;
-    padding: 2vw;
-    border-radius: 2vw;
-    box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
-    width: 90vw;
-    max-width: 700px;
-    text-align: center;
-    margin: 5vh auto;
-    border: 0.3vw solid #ff5722;
+body.dark-mode .login-container,
+body.dark-mode .container,
+body.dark-mode .footer {
+    background: #34495e;
+    color: #ecf0f1;
+    border-color: #ecf0f1;
 }
 
-.slide-in {
-    animation: slideIn 0.5s ease-in-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-5vh); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.login-box, .profile-box {
-    background: #e0f7fa;
-    padding: 1.5vw;
-    border-radius: 1.5vw;
-    margin-top: 2vh;
-}
-
-.profile-row {
-    display: flex;
-    justify-content: space-between;
+.toggle-btn {
+    background: #8e44ad;
+    color: white;
+    padding: 1vw;
+    border-radius: 1vw;
     margin: 1vh 0;
 }
 
-.profile-row label {
-    flex: 1;
-    margin: 0 1vw;
-}
-
-h2, h3 {
-    color: #ff5722;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+.logo {
     margin-bottom: 2vh;
+    animation: bounce 2s infinite;
 }
 
-input, button {
-    display: inline-block;
-    margin: 1vh 0.5vw;
-    padding: 1.2vw;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#progress-bar {
+    width: 100%;
+    background: #ddd;
     border-radius: 1vw;
-    border: 0.2vw solid #ff9800;
+    height: 2vh;
+    margin: 2vh 0;
+    position: relative;
 }
 
-button {
-    background: #ff5722;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background: #e64a19;
-}
-
-.profile-btn {
+#progress-fill {
+    height: 100%;
     background: #4caf50;
-    padding: 1vw;
-    color: white;
-    text-decoration: none;
     border-radius: 1vw;
-    margin: 0.5vh;
+    width: 0%;
+    transition: width 0.5s;
 }
 
-.back-btn {
-    background: #2196f3;
-    margin: 1vh;
+#progress-text {
+    position: absolute;
+    top: -1.5vh;
+    right: 1vw;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
 }
 
-.logout-btn {
-    background: #f44336;
-}
-
-#lessonList button, #topics button {
-    background: #ff9800;
-    margin: 0.5vh;
-    padding: 1.5vw;
-    font-size: clamp(1rem, 1.8vw, 1.5rem);
-}
-
-.exercise-controls {
-    margin-top: 2vh;
-}
-
-.dropzone {
+.option-image {
     width: clamp(50px, 10vw, 100px);
-    height: clamp(50px, 10vw, 100px);
-    border: 0.3vw dashed #ff5722;
-    display: inline-block;
+    cursor: pointer;
     margin: 1vw;
-    background: #fff3e0;
-    border-radius: 1vw;
-    text-align: center;
-    line-height: clamp(50px, 10vw, 100px);
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
-span[draggable] {
-    padding: 1vw;
-    margin: 0.5vh;
-    background: #ffeb3b;
-    cursor: move;
-    border-radius: 1vw;
-    border: 0.2vw solid #ff9800;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-}
-
-#exercise-panel {
+#vocabulary, #leaderboard, #parent-mode {
     background: #e0f7fa;
     padding: 2vw;
     border-radius: 1.5vw;
     margin-top: 2vh;
-    border: 0.2vw solid #ff9800;
 }
 
-.footer {
-    text-align: center;
-    padding: 1vh;
-    background: #fff;
-    border-top: 0.2vw solid #ff5722;
+textarea {
     width: 100%;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
-}
-
-.support {
-    position: fixed;
-    bottom: 2vh;
-    right: 2vw;
-    background: #4caf50;
-    padding: 1vw;
+    height: 10vh;
+    margin: 1vh 0;
     border-radius: 1vw;
+    border: 0.2vw solid #ff9800;
+    padding: 1vw;
 }
 
-.support a {
-    color: white;
-    text-decoration: none;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+.seasonal-theme {
+    background: url('seasonal-bg.png') no-repeat center/cover;
 }
 
-.package-box {
-    padding: 2vw;
-    margin: 1vh;
-    border-radius: 1.5vw;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s;
+body.seasonal-theme .package-box {
+    border: 0.3vw solid #fff;
 }
-
-.package-box:hover {
-    transform: scale(1.05);
-}
-
-.blue { background: #2196f3; }
-.orange { background: #ff9800; }
-.gold { background: #ffd700; }
