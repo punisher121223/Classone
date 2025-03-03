@@ -71,6 +71,15 @@ const lessons = {
 <div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>
 `),
     },
+    "علوم": {
+        "درس ۱": Array.from({ length: 10 }, (_, i) => i === 0 ? `
+تمرین: کدام حیوان پرنده است؟ 🐦
+<div class="option" onclick="checkAnswer(this, 'پرنده')">پرنده</div><div class="option" onclick="checkAnswer(this, 'گربه')">گربه</div>
+` : `
+تمرین ${i + 1}: آب چه رنگی است؟
+<div class="option" onclick="checkAnswer(this, 'بی‌رنگ')">بی‌رنگ</div><div class="option" onclick="checkAnswer(this, 'قرمز')">قرمز</div>
+`),
+    },
     "بازی": {
         "بازی ۱": Array.from({ length: 10 }, (_, i) => i === 0 ? `
 بازی: سیب‌ها را بشمار 🍎🍎🍎
@@ -92,7 +101,7 @@ document.getElementById("registerForm")?.addEventListener("submit", (e) => {
     localStorage.setItem("progress_" + username, JSON.stringify({}));
     localStorage.setItem("package_" + username, JSON.stringify({ name: "رایگان", exercises: 15, expiry: null }));
     localStorage.setItem("score_" + username, "0");
-    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈", () => window.location.href = "login.html");
+    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈", () => window.location.href = "./login.html");
 });
 
 document.getElementById("loginForm")?.addEventListener("submit", (e) => {
@@ -103,14 +112,14 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
     if (storedPass && btoa(password) === storedPass) {
         localStorage.setItem("loggedIn", username);
         if (username === "alireza" && password === "12122312") localStorage.setItem("isAdmin", "true");
-        window.location.href = "lessons.html";
+        window.location.href = "./lessons.html";
     } else {
         showAlert("نام کاربری یا رمز عبور اشتباه است 😔");
     }
 });
 
 if ((window.location.pathname.includes("lessons.html") || window.location.pathname.includes("profile.html") || window.location.pathname.includes("payment.html") || window.location.pathname.includes("vocabulary.html")) && !localStorage.getItem("loggedIn")) {
-    window.location.href = "login.html";
+    window.location.href = "./login.html";
 }
 
 // نمایش فهرست موضوعات
@@ -133,11 +142,11 @@ function showExercises(lesson, topic, index) {
     const package = JSON.parse(localStorage.getItem("package_" + username));
     const progress = getProgress(lesson, topic);
     if (progress >= 15 && package.name === "رایگان") {
-        showAlert("تمرین رایگان شما به اتمام رسید! برای ادامه بسته بخرید.", () => window.location.href = "payment.html");
+        showAlert("تمرین رایگان شما به اتمام رسید! برای ادامه بسته بخرید.", () => window.location.href = "./payment.html");
         return;
     }
     if (index >= package.exercises && package.name !== "دانشمند آینده") {
-        showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.", () => window.location.href = "payment.html");
+        showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.", () => window.location.href = "./payment.html");
         return;
     }
 
@@ -180,7 +189,7 @@ function saveProgress(lesson, topic, index) {
 
 function getProgress(lesson, topic) {
     const username = localStorage.getItem("loggedIn");
-    const progress = JSON.parse(localStorage.getItem("progress_" + username)) || {};
+    const progress = JSON.parse(localStorage.getItem("progress_" + username) || "{}");
     return progress[lesson]?.[topic] || 0;
 }
 
@@ -437,7 +446,26 @@ function showReport() {
 
 // خرید بسته
 function confirmPurchase(packageName, packageDetails) {
-    showAlert(`آیا قصد خرید بسته "${packageName}" را دارید؟`, () => goToTelegram(packageName, packageDetails));
+    const existingAlert = document.querySelector(".custom-alert");
+    if (existingAlert) existingAlert.remove();
+    const alertDiv = document.createElement("div");
+    alertDiv.className = "custom-alert";
+    alertDiv.innerHTML = `
+<p>آیا قصد خرید بسته "${packageName}" را دارید؟</p>
+<button onclick="this.parentElement.remove()">خرید کنسل شود ❌</button>
+<button onclick="goToTelegram('${packageName}', '${packageDetails}');this.parentElement.remove()">برو به خرید ✅</button>
+`;
+    alertDiv.style.position = "fixed";
+    alertDiv.style.top = "50%";
+    alertDiv.style.left = "50%";
+    alertDiv.style.transform = "translate(-50%, -50%)";
+    alertDiv.style.background = "#fff";
+    alertDiv.style.padding = "2vw";
+    alertDiv.style.borderRadius = "1vw";
+    alertDiv.style.boxShadow = "0 0 2vw rgba(0, 0, 0, 0.5)";
+    alertDiv.style.zIndex = "1000";
+    alertDiv.style.textAlign = "center";
+    document.body.appendChild(alertDiv);
 }
 
 function goToTelegram(packageName, packageDetails) {
@@ -450,5 +478,5 @@ function goToTelegram(packageName, packageDetails) {
 function logout() {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("isAdmin");
-    window.location.href = "login.html";
+    window.location.href = "./login.html";
 }
