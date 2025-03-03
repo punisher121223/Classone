@@ -10,23 +10,15 @@
     <div class="date-time" id="jalaliDate">📅 تاریخ: </div>
     <div class="container">
         <h2>دروس کلاس اولی‌ها 🌟</h2>
-        <div id="lessonList">
+        <div id="lessonList" class="lesson-list">
             <button onclick="showTopics('نگارش')">نگارش ✍️</button>
             <button onclick="showTopics('ریاضی')">ریاضی ➕</button>
             <button onclick="showTopics('علوم')">علوم 🔬</button>
             <button onclick="showTopics('بازی')">بازی 🎲</button>
-            <button onclick="window.location.href='profile.html'">پروفایل من 👤</button>
-            <button onclick="window.location.href='vocabulary.html'">واژه‌نامه 📖</button>
+            <button onclick="window.location.href='./profile.html'">پروفایل من 👤</button>
+            <button onclick="window.location.href='./vocabulary.html'">واژه‌نامه 📖</button>
         </div>
-        <div id="topics"></div>
-        <div id="exercise-panel"></div>
-        <div class="exercise-controls">
-            <button id="checkAnswerBtn" style="display:none;" onclick="checkAllAnswers()">بررسی جواب ✅</button>
-            <button onclick="nextExercise()">تمرین بعدی ⏩</button>
-            <button onclick="resetProgress()">شروع از اول 🔄</button>
-            <button onclick="resetPanel();document.getElementById('topics').innerHTML=''">برگشت به دروس 🔙</button>
-            <button onclick="window.location.href='./login.html'">برگشت به صفحه ورود 🏠</button>
-        </div>
+        <div id="topics" class="topics-list"></div>
         <div id="progressBar" class="progress-bar"><div id="progressFill"></div></div>
         <div id="scoreDisplay">امتیاز شما: <span id="score">0</span> 🌟</div>
     </div>
