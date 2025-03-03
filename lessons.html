@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دروس</title>
+    <title>دروس کلاس اولی‌ها</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="date-time">📅 تاریخ: <span id="jalaliDate"></span></div>
-    <div class="container slide-in">
+    <div class="date-time" id="jalaliDate">📅 تاریخ: </div>
+    <div class="container">
+        <img src="logo.png" alt="لوگوی کلاس اولی‌ها" class="logo" width="100">
         <h2>دروس کلاس اولی‌ها 🌟</h2>
         <div id="lessonList">
-            <button onclick="showTopics('فارسی')">فارسی 📚</button>
             <button onclick="showTopics('نگارش')">نگارش ✍️</button>
             <button onclick="showTopics('ریاضی')">ریاضی ➕</button>
+            <button onclick="showTopics('علوم')">علوم 🔬</button>
             <button onclick="showTopics('بازی')">بازی 🎲</button>
-            <a href="profile.html" class="profile-btn">پروفایل من 👤</a>
+            <button onclick="window.location.href='profile.html'">پروفایل من 👤</button>
         </div>
         <div id="topics"></div>
+        <div id="progress-bar">
+            <span id="progress-text">پیشرفت: 0%</span>
+            <div id="progress-fill"></div>
+        </div>
         <div id="exercise-panel"></div>
         <div class="exercise-controls">
             <button onclick="nextExercise()">تمرین بعدی ⏩</button>
             <button onclick="resetProgress()">شروع از اول 🔄</button>
-            <button onclick="document.getElementById('topics').innerHTML='';">برگشت به دروس 🔙</button>
-            <button class="back-btn" onclick="window.location.href='index.html'">برگشت به صفحه لاگین 🏠</button>
+            <button onclick="checkAnswers()">بررسی جواب ✅</button>
+            <button onclick="playQuestion()">بخون 🔊</button>
+            <button onclick="showTopics(currentLesson)">برگشت به دروس 🔙</button>
+            <button onclick="window.location.href='login.html'">برگشت به صفحه ورود 🏠</button>
         </div>
     </div>
-    <div class="footer">
+    <footer class="footer">
         تمام حقوق این سایت متعلق به علیرضا جعفری رودباری (آموزگار پایه اول ابتدایی) می‌باشد. شماره تماس: ۰۹۹۶۱۱۳۰۷۸۷ | آیدی تلگرام: @alireza_teacher
-    </div>
-    <div class="support">
-        <a href="https://t.me/alireza_teacher" target="_blank">📞 ارتباط با پشتیبانی</a>
-    </div>
-    <script src="script.js"></script>
+    </footer>
+    <div class="support"><a href="https://t.me/alireza_teacher">📞 ارتباط با پشتیبانی</a></div>
 </body>
 </html>
