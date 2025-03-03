@@ -3,51 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروفایل من</title>
+    <title>پروفایل</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="date-time" id="jalaliDate">📅 تاریخ: </div>
     <div class="container">
-        <img src="logo.png" alt="لوگوی کلاس اولی‌ها" class="logo" width="100">
         <h2>پروفایل من 👤</h2>
         <div class="profile-box">
             <div id="profileInfo"></div>
-            <img id="profileImage" style="display:none; max-width: 100px; border-radius: 10px;">
             <div class="profile-row">
-                <label>نام: </label><input type="text" id="firstName" required>
-                <label>نام خانوادگی: </label><input type="text" id="lastName" required>
+                <label>نام: <input id="firstName" type="text" placeholder="نام"></label>
+                <label>نام خانوادگی: <input id="lastName" type="text" placeholder="نام خانوادگی"></label>
             </div>
             <div class="profile-row">
-                <label>عکس: </label><input type="file" id="profilePic" accept="image/*">
+                <label>عکس: <input id="profilePic" type="file" accept="image/*"></label>
+                <img id="profileImage" style="display:none; max-width: 120px; border-radius: 10px;">
             </div>
             <button onclick="saveProfile()">ذخیره 🌈</button>
             <button id="editBtn" onclick="editProfile()" style="display:none;">ویرایش ✏️</button>
-            <button onclick="showLeaderboard()">جدول رده‌بندی 🏆</button>
-            <button onclick="showVocabulary()">واژه‌نامه 📖</button>
-            <button onclick="showParentMode()">حالت والدین 👨‍👩‍👧</button>
+            <div id="scoreDisplay">امتیاز شما: <span id="score">0</span> 🌟</div>
+            <div id="medals"></div>
         </div>
-        <div id="userList"></div>
-        <button id="showUsersBtn" style="display:none;" onclick="showUsers()">نمایش کاربران 👥</button>
-        <a href="payment.html" class="profile-btn">خرید بسته‌های آموزشی 💰</a>
-        <button onclick="logout()" class="profile-btn logout-btn">خروج 🚪</button>
-        <a href="lessons.html" class="profile-btn back-btn">برگشت به دروس 📚</a>
-        <a href="login.html" class="profile-btn back-btn">برگشت به صفحه ورود 🏠</a>
-        <div id="chat-box" style="margin-top: 20px;">
-            <h3>چت با معلم 💬</h3>
-            <textarea id="chatMessage" placeholder="سوالت رو بنویس..."></textarea>
-            <button onclick="sendChat()">ارسال 📤</button>
-        </div>
-        <div id="feedback-box" style="margin-top: 20px;">
-            <h3>ارسال بازخورد ✍️</h3>
-            <textarea id="feedback" placeholder="نظرت رو بنویس..."></textarea>
-            <button onclick="sendFeedback()">ارسال 📤</button>
-        </div>
+        <button class="profile-btn" onclick="window.location.href='payment.html'">خرید بسته‌های آموزشی 💰</button>
+        <button class="profile-btn logout-btn" onclick="logout()">خروج 🚪</button>
+        <button class="back-btn" onclick="window.location.href='lessons.html'">برگشت به دروس 📚</button>
+        <button class="back-btn" onclick="window.location.href='login.html'">برگشت به صفحه ورود 🏠</button>
+        <button id="showUsersBtn" class="profile-btn" style="display:none;" onclick="showAdminPanel()">پنل مدیریت 👥</button>
+        <div id="adminPanel" class="admin-panel" style="display:none;"></div>
     </div>
     <footer class="footer">
         تمام حقوق این سایت متعلق به علیرضا جعفری رودباری (آموزگار پایه اول ابتدایی) می‌باشد. شماره تماس: ۰۹۹۶۱۱۳۰۷۸۷ | آیدی تلگرام: @alireza_teacher
     </footer>
-    <div class="support"><a href="https://t.me/alireza_teacher">📞 ارتباط با پشتیبانی</a></div>
+    <div class="support">
+        <a href="https://t.me/alireza_teacher">📞 ارتباط با پشتیبانی</a>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
