@@ -1,90 +1,273 @@
-/* استایل‌های قبلی حفظ می‌شوند، فقط موارد جدید اضافه می‌شوند */
+* {
+    font-family: 'Vazir', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
 @font-face {
-    font-family: 'Koodak';
-    src: url('https://cdn.fontcdn.ir/Font/Persian/Koodak/Koodak.woff') format('woff');
+    font-family: 'Vazir';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.woff') format('woff');
 }
 
-body.dark-mode {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-    color: #ecf0f1;
+.date-time {
+    position: fixed;
+    top: 1vh;
+    left: 1vw;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5vw 1vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    z-index: 100;
 }
 
-body.dark-mode .login-container,
-body.dark-mode .container,
-body.dark-mode .footer {
-    background: #34495e;
-    color: #ecf0f1;
-    border-color: #ecf0f1;
+.login-container, .container {
+    background: #fff;
+    padding: 2vw;
+    border-radius: 1.5vw;
+    box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.1);
+    width: 90vw;
+    max-width: 800px;
+    text-align: center;
+    margin: 5vh auto;
+    border: 0.2vw solid #2196f3;
+    animation: slideIn 0.5s ease-in-out;
 }
 
-.toggle-btn {
-    background: #8e44ad;
-    color: white;
-    padding: 1vw;
+@keyframes slideIn {
+    from { transform: translateY(-5vh); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.form-box, .profile-box {
+    background: #f1faff;
+    padding: 2vw;
     border-radius: 1vw;
-    margin: 1vh 0;
-}
-
-.logo {
-    margin-bottom: 2vh;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-#progress-bar {
-    width: 100%;
-    background: #ddd;
-    border-radius: 1vw;
-    height: 2vh;
     margin: 2vh 0;
-    position: relative;
+    border: 0.1vw solid #bbdefb;
 }
 
-#progress-fill {
+.profile-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1vh 0;
+    gap: 1vw;
+}
+
+.profile-row label {
+    flex: 1;
+    text-align: right;
+}
+
+h2, h3 {
+    color: #1976d2;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 2vh;
+    text-shadow: 0 0.1vw 0.2vw rgba(0, 0, 0, 0.05);
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    margin: 1vh auto;
+    padding: 1vw;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    border-radius: 0.8vw;
+    border: 0.2vw solid #42a5f5;
+    transition: all 0.3s;
+}
+
+button {
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1976d2;
+    transform: scale(1.03);
+}
+
+.link-btn {
+    display: inline-block;
+    margin: 1vh 0;
+    color: #0288d1;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+.profile-btn {
+    background: #4caf50;
+    padding: 0.8vw;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.8vw;
+    margin: 0.5vh;
+    display: inline-block;
+}
+
+.profile-btn:hover {
+    background: #388e3c;
+}
+
+.back-btn {
+    background: #0288d1;
+    margin: 1vh;
+}
+
+.logout-btn {
+    background: #d32f2f;
+}
+
+#lessonList button, #topics button {
+    background: #42a5f5;
+    margin: 0.5vh;
+    padding: 1.2vw;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    border-radius: 0.8vw;
+}
+
+.exercise-controls {
+    margin-top: 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.dropzone {
+    width: clamp(80px, 15vw, 150px);
+    height: clamp(80px, 15vw, 150px);
+    border: 0.3vw dashed #2196f3;
+    display: inline-block;
+    margin: 1vw;
+    background: #e3f2fd;
+    border-radius: 1vw;
+    text-align: center;
+    line-height: clamp(80px, 15vw, 150px);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+span[draggable], .option {
+    padding: 1vw;
+    margin: 0.5vh;
+    background: #bbdefb;
+    cursor: pointer;
+    border-radius: 0.8vw;
+    border: 0.2vw solid #42a5f5;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    display: inline-block;
+}
+
+#exercise-panel {
+    background: #f1faff;
+    padding: 2vw;
+    border-radius: 1vw;
+    margin-top: 2vh;
+    border: 0.1vw solid #bbdefb;
+}
+
+.footer {
+    text-align: center;
+    padding: 1vh;
+    background: rgba(255, 255, 255, 0.9);
+    border-top: 0.2vw solid #2196f3;
+    width: 100%;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    position: fixed;
+    bottom: 0;
+}
+
+.support {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    background: #4caf50;
+    padding: 0.8vw;
+    border-radius: 0.8vw;
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
+}
+
+.support a {
+    color: white;
+    text-decoration: none;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+}
+
+.package-box {
+    padding: 2vw;
+    margin: 1vh;
+    border-radius: 1vw;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.package-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.2);
+}
+
+.blue { background: #2196f3; }
+.orange { background: #ff9800; }
+.gold { background: #ffb300; }
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    margin: 2vh 0;
+    overflow: hidden;
+}
+
+#progressFill {
     height: 100%;
     background: #4caf50;
-    border-radius: 1vw;
     width: 0%;
     transition: width 0.5s;
 }
 
-#progress-text {
-    position: absolute;
-    top: -1.5vh;
-    right: 1vw;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
+#scoreDisplay {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    margin: 1vh 0;
+    color: #1976d2;
 }
 
-.option-image {
-    width: clamp(50px, 10vw, 100px);
-    cursor: pointer;
-    margin: 1vw;
-}
-
-#vocabulary, #leaderboard, #parent-mode {
-    background: #e0f7fa;
-    padding: 2vw;
-    border-radius: 1.5vw;
-    margin-top: 2vh;
-}
-
-textarea {
-    width: 100%;
-    height: 10vh;
+.vocab-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1faff;
+    padding: 1vw;
     margin: 1vh 0;
     border-radius: 1vw;
-    border: 0.2vw solid #ff9800;
-    padding: 1vw;
 }
 
-.seasonal-theme {
-    background: url('seasonal-bg.png') no-repeat center/cover;
+.vocab-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
 }
 
-body.seasonal-theme .package-box {
-    border: 0.3vw solid #fff;
+.admin-panel {
+    background: #eceff1;
+    padding: 2vw;
+    border-radius: 1vw;
+    margin-top: 2vh;
 }
