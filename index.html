@@ -3,35 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود و ثبت‌نام</title>
+    <title>ورود به کلاس اولی‌ها</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="date-time">📅 تاریخ: <span id="jalaliDate"></span></div>
-    <div class="login-container slide-in">
-        <h2>🌟 به کلاس اولی‌ها خوش آمدی! 🌟</h2>
-        <div class="login-box">
+    <div class="date-time" id="jalaliDate">📅 تاریخ: </div>
+    <div class="login-container">
+        <img src="logo.png" alt="لوگوی کلاس اولی‌ها" class="logo" width="100">
+        <h2>🌟 به کلاس اولی‌ها خوش آمدید! 🌟</h2>
+        <div class="form-box">
             <h3>ورود</h3>
             <form id="loginForm">
                 <input type="text" id="username" placeholder="نام کاربری" required>
                 <input type="password" id="password" placeholder="رمز عبور" required>
                 <button type="submit">ورود 🚀</button>
             </form>
-            <h3>ثبت‌نام</h3>
-            <form id="registerForm">
-                <input type="text" id="regUsername" placeholder="نام کاربری" required>
-                <input type="password" id="regPassword" placeholder="رمز عبور" required>
-                <button type="submit">ثبت‌نام 🎉</button>
-            </form>
-            <p id="message"></p>
+            <a href="register.html" class="link-btn">ثبت‌نام نکردی؟ اینجا کلیک کن 🎉</a>
         </div>
+        <button id="darkModeToggle" class="toggle-btn">🌙 حالت شب</button>
     </div>
-    <div class="footer">
+    <footer class="footer">
         تمام حقوق این سایت متعلق به علیرضا جعفری رودباری (آموزگار پایه اول ابتدایی) می‌باشد. شماره تماس: ۰۹۹۶۱۱۳۰۷۸۷ | آیدی تلگرام: @alireza_teacher
-    </div>
-    <div class="support">
-        <a href="https://t.me/alireza_teacher" target="_blank">📞 ارتباط با پشتیبانی</a>
-    </div>
-    <script src="script.js"></script>
+    </footer>
+    <div class="support"><a href="https://t.me/alireza_teacher">📞 ارتباط با پشتیبانی</a></div>
 </body>
 </html>
