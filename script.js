@@ -2,7 +2,7 @@
 function updateJalaliDate() {
     const date = new Date();
     const jalaliDate = new Intl.DateTimeFormat('fa-IR', { dateStyle: 'full', timeStyle: 'short' }).format(date);
-    document.querySelectorAll("#jalaliDate").forEach(el => el.textContent = jalaliDate);
+    document.querySelectorAll("#jalaliDate").forEach(el => el.textContent = "📅 " + jalaliDate);
 }
 setInterval(updateJalaliDate, 1000);
 updateJalaliDate();
@@ -45,7 +45,7 @@ const lessons = {
 `;
             return `
 تمرین ${i + 1}: کدام کلمه درست است؟
-<div class="option" onclick="checkAnswer(this, 'آب')">آب</div><div class="option" onclick="checkAnswer(this, 'آب')">آد</div>
+<div class="option" onclick="checkAnswer(this, 'آب')">آب</div><div class="option" onclick="checkAnswer(this, 'آد')">آد</div>
 `;
         }),
         "نگاره ۲": Array.from({ length: 100 }, (_, i) => {
@@ -58,28 +58,26 @@ const lessons = {
 `;
             return `
 تمرین ${i + 1}: کدام کلمه درست است؟
-<div class="option" onclick="checkAnswer(this, 'اسب')">اسب</div><div class="option" onclick="checkAnswer(this, 'اسب')">اسد</div>
+<div class="option" onclick="checkAnswer(this, 'اسب')">اسب</div><div class="option" onclick="checkAnswer(this, 'اسد')">اسد</div>
 `;
         }),
-        // سایر نگاره‌ها و نشانه‌ها مشابه
     },
     "ریاضی": {
         "تم ۱": Array.from({ length: 100 }, (_, i) => i === 0 ? `
 تمرین: ۲ + ۳ = ? ➕
-<div class="option" onclick="checkAnswer(this, '۵')">۵</div><div class="option" onclick="checkAnswer(this, '۵')">۴</div>
+<div class="option" onclick="checkAnswer(this, '۵')">۵</div><div class="option" onclick="checkAnswer(this, '۴')">۴</div>
 ` : `
 تمرین ${i + 1}: ۱ + ۲ = ? ➕
-<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۳')">۲</div>
+<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>
 `),
-        // سایر تم‌ها مشابه
     },
     "بازی": {
         "بازی ۱": Array.from({ length: 10 }, (_, i) => i === 0 ? `
 بازی: سیب‌ها را بشمار 🍎🍎🍎
-<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۳')">۲</div>
+<div class="option" onclick="checkAnswer(this, '۳')">۳</div><div class="option" onclick="checkAnswer(this, '۲')">۲</div>
 ` : `
 بازی ${i + 1}: ستاره‌ها را بشمار ⭐⭐⭐⭐
-<div class="option" onclick="checkAnswer(this, '۴')">۴</div><div class="option" onclick="checkAnswer(this, '۴')">۳</div>
+<div class="option" onclick="checkAnswer(this, '۴')">۴</div><div class="option" onclick="checkAnswer(this, '۳')">۳</div>
 `),
     }
 };
@@ -94,8 +92,7 @@ document.getElementById("registerForm")?.addEventListener("submit", (e) => {
     localStorage.setItem("progress_" + username, JSON.stringify({}));
     localStorage.setItem("package_" + username, JSON.stringify({ name: "رایگان", exercises: 15, expiry: null }));
     localStorage.setItem("score_" + username, "0");
-    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈");
-    setTimeout(() => window.location.href = "login.html", 2000);
+    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈", () => window.location.href = "login.html");
 });
 
 document.getElementById("loginForm")?.addEventListener("submit", (e) => {
@@ -136,13 +133,11 @@ function showExercises(lesson, topic, index) {
     const package = JSON.parse(localStorage.getItem("package_" + username));
     const progress = getProgress(lesson, topic);
     if (progress >= 15 && package.name === "رایگان") {
-        showAlert("تمرین رایگان شما به اتمام رسید! برای ادامه بسته بخرید.");
-        setTimeout(() => window.location.href = "payment.html", 2000);
+        showAlert("تمرین رایگان شما به اتمام رسید! برای ادامه بسته بخرید.", () => window.location.href = "payment.html");
         return;
     }
     if (index >= package.exercises && package.name !== "دانشمند آینده") {
-        showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.");
-        setTimeout(() => window.location.href = "payment.html", 2000);
+        showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.", () => window.location.href = "payment.html");
         return;
     }
 
@@ -208,9 +203,8 @@ function checkAnswer(element, correctAnswer) {
     const userAnswer = element.textContent;
     if (userAnswer === correctAnswer) {
         cheerSound.play();
-        showAlert("درست است! 🌟");
+        showAlert("درست است! 🌟", nextExercise);
         updateScore(5);
-        setTimeout(nextExercise, 1000);
     } else {
         showAlert("غلط است، دوباره تلاش کن! 😔");
     }
@@ -225,17 +219,15 @@ function checkAllAnswers() {
         const correctOrder = dropzones[0].getAttribute("ondrop").match(/'(.*?)'/)[1];
         if (droppedItems === correctOrder) {
             cheerSound.play();
-            showAlert("درست است! 🌟");
+            showAlert("درست است! 🌟", nextExercise);
             updateScore(5);
-            setTimeout(nextExercise, 1000);
         } else {
             showAlert("ترتیب اشتباه است، دوباره تلاش کن! 😔");
         }
     } else if (options.length > 0) {
         options.forEach(opt => {
-            if (opt.onclick.toString().includes(options[0].getAttribute("onclick").match(/'(.*?)'/)[1])) {
-                opt.click();
-            }
+            const correct = opt.getAttribute("onclick").match(/'(.*?)'/)[1];
+            if (opt.textContent === correct) opt.click();
         });
     }
 }
@@ -260,14 +252,14 @@ function drop(event, correctOrder) {
 }
 
 // نمایش پیام با دکمه
-function showAlert(message) {
+function showAlert(message, callback) {
     const existingAlert = document.querySelector(".custom-alert");
     if (existingAlert) existingAlert.remove();
     const alertDiv = document.createElement("div");
     alertDiv.className = "custom-alert";
     alertDiv.innerHTML = `
 <p>${message}</p>
-<button onclick="this.parentElement.remove()">باشه</button>
+<button onclick="this.parentElement.remove();${callback ? callback.toString().replace(/function\s*\(\)\s*{(.*)}/, '$1') : ''}">باشه</button>
 `;
     alertDiv.style.position = "fixed";
     alertDiv.style.top = "50%";
@@ -335,9 +327,20 @@ if (window.location.pathname.includes("profile.html")) {
     }
 }
 
-// نمایش کاربران
+// پنل مدیریت
+function showAdminPanel() {
+    const adminPanel = document.getElementById("adminPanel");
+    adminPanel.style.display = "block";
+    adminPanel.innerHTML = `
+        <h3>مدیریت کاربران 👥</h3>
+        <div id="userList"></div>
+        <button onclick="deleteAllUsers()">حذف همه کاربران 🗑️</button>
+        <button onclick="showReport()">نمایش گزارش 📊</button>
+    `;
+    showUsers();
+}
+
 function showUsers() {
-    const username = localStorage.getItem("loggedIn");
     const userList = document.getElementById("userList");
     userList.innerHTML = "";
     for (let i = 0; i < localStorage.length; i++) {
@@ -345,8 +348,15 @@ function showUsers() {
         if (key.startsWith("user_")) {
             const user = key.replace("user_", "");
             const package = JSON.parse(localStorage.getItem("package_" + user));
+            const score = localStorage.getItem("score_" + user) || "0";
+            const progress = JSON.parse(localStorage.getItem("progress_" + user) || "{}");
             const div = document.createElement("div");
-            div.innerHTML = `کاربر: ${user} | بسته: ${package.name} ${username === "alireza" ? `<button onclick="activatePackage('${user}')">فعال‌سازی بسته</button>` : ""}`;
+            div.innerHTML = `
+                کاربر: ${user} | بسته: ${package.name} | امتیاز: ${score}
+                <button onclick="activatePackage('${user}')">تغییر بسته</button>
+                <button onclick="deleteUser('${user}')">حذف کاربر</button>
+                <button onclick="resetUserProgress('${user}')">بازنشانی پیشرفت</button>
+            `;
             userList.appendChild(div);
         }
     }
@@ -354,7 +364,7 @@ function showUsers() {
 
 function activatePackage(username) {
     if (localStorage.getItem("loggedIn") !== "alireza") {
-        showAlert("فقط مدیر می‌تواند بسته‌ها را فعال کند!");
+        showAlert("فقط مدیر می‌تواند بسته‌ها را تغییر دهد!");
         return;
     }
     const packageName = prompt("نام بسته را وارد کنید (دانش‌آموز، دانشجوی آینده، دانشمند آینده):");
@@ -367,35 +377,73 @@ function activatePackage(username) {
     showUsers();
 }
 
+function deleteUser(username) {
+    if (localStorage.getItem("loggedIn") !== "alireza") {
+        showAlert("فقط مدیر می‌تواند کاربران را حذف کند!");
+        return;
+    }
+    if (confirm(`آیا مطمئنید که می‌خواهید کاربر ${username} را حذف کنید؟`)) {
+        localStorage.removeItem("user_" + username);
+        localStorage.removeItem("progress_" + username);
+        localStorage.removeItem("package_" + username);
+        localStorage.removeItem("score_" + username);
+        localStorage.removeItem("firstName_" + username);
+        localStorage.removeItem("lastName_" + username);
+        localStorage.removeItem("profilePic_" + username);
+        showUsers();
+    }
+}
+
+function deleteAllUsers() {
+    if (localStorage.getItem("loggedIn") !== "alireza") {
+        showAlert("فقط مدیر می‌تواند همه کاربران را حذف کند!");
+        return;
+    }
+    if (confirm("آیا مطمئنید که می‌خواهید همه کاربران را حذف کنید؟")) {
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+            const key = localStorage.key(i);
+            if (key.startsWith("user_") || key.startsWith("progress_") || key.startsWith("package_") || key.startsWith("score_") || key.startsWith("firstName_") || key.startsWith("lastName_") || key.startsWith("profilePic_")) {
+                localStorage.removeItem(key);
+            }
+        }
+        showUsers();
+    }
+}
+
+function resetUserProgress(username) {
+    if (localStorage.getItem("loggedIn") !== "alireza") {
+        showAlert("فقط مدیر می‌تواند پیشرفت را بازنشانی کند!");
+        return;
+    }
+    localStorage.setItem("progress_" + username, JSON.stringify({}));
+    localStorage.setItem("score_" + username, "0");
+    showUsers();
+}
+
+function showReport() {
+    const adminPanel = document.getElementById("adminPanel");
+    let totalUsers = 0, totalScore = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("user_")) totalUsers++;
+        if (key.startsWith("score_")) totalScore += parseInt(localStorage.getItem(key) || "0");
+    }
+    adminPanel.innerHTML += `
+        <h3>گزارش 📊</h3>
+        <p>تعداد کل کاربران: ${totalUsers}</p>
+        <p>مجموع امتیازات: ${totalScore}</p>
+    `;
+}
+
 // خرید بسته
 function confirmPurchase(packageName, packageDetails) {
-    const existingAlert = document.querySelector(".custom-alert");
-    if (existingAlert) existingAlert.remove();
-    const alertDiv = document.createElement("div");
-    alertDiv.className = "custom-alert";
-    alertDiv.innerHTML = `
-<p>آیا قصد خرید بسته "${packageName}" را دارید؟</p>
-<button onclick="this.parentElement.remove()">خیر</button>
-<button onclick="goToTelegram('${packageName}', '${packageDetails}')">برو به خرید</button>
-`;
-    alertDiv.style.position = "fixed";
-    alertDiv.style.top = "50%";
-    alertDiv.style.left = "50%";
-    alertDiv.style.transform = "translate(-50%, -50%)";
-    alertDiv.style.background = "#fff";
-    alertDiv.style.padding = "2vw";
-    alertDiv.style.borderRadius = "1vw";
-    alertDiv.style.boxShadow = "0 0 2vw rgba(0, 0, 0, 0.5)";
-    alertDiv.style.zIndex = "1000";
-    alertDiv.style.textAlign = "center";
-    document.body.appendChild(alertDiv);
+    showAlert(`آیا قصد خرید بسته "${packageName}" را دارید؟`, () => goToTelegram(packageName, packageDetails));
 }
 
 function goToTelegram(packageName, packageDetails) {
     const username = localStorage.getItem("loggedIn");
     const message = `سلام، من می‌خواهم بسته "${packageName}" را خریداری کنم.\nجزئیات: ${packageDetails}\nنام کاربری: ${username}`;
     window.open(`https://t.me/alireza_teacher?text=${encodeURIComponent(message)}`, "_blank");
-    document.querySelector(".custom-alert").remove();
 }
 
 // خروج
