@@ -139,12 +139,17 @@ button:hover {
     background: #d32f2f;
 }
 
-.lesson-list button, .topics-list button {
+.lesson-list button, .topics-list button, .sub-lesson-list button {
     background: #42a5f5;
     margin: 0.5vh;
     padding: 1.2vw;
     font-size: clamp(1rem, 1.8vw, 1.5rem);
     border-radius: 0.8vw;
+}
+
+.sub-lesson-list button {
+    background: #64b5f6;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
 }
 
 .exercise-panel {
