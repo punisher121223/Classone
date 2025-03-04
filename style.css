@@ -161,28 +161,44 @@ button:hover {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
-.dropzone {
-    width: clamp(120px, 20vw, 200px);
-    height: clamp(120px, 20vw, 200px);
-    border: 0.3vw dashed #2196f3;
-    display: inline-block;
-    margin: 2vw;
-    background: #e3f2fd;
-    border-radius: 1vw;
-    text-align: center;
-    line-height: clamp(120px, 20vw, 200px);
-    font-size: clamp(1.5rem, 2vw, 2rem);
+/* استایل‌های جدید برای تمرین‌ساز */
+.exercise-container {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-span[draggable], .option {
-    padding: 1.5vw;
-    margin: 1vh;
-    background: #bbdefb;
+.dropzone {
+    width: 60px;
+    height: 40px;
+    border: 2px dashed #333;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+.parts-container {
+    margin-top: 20px;
+}
+
+.draggable {
+    padding: 10px;
+    background-color: #e0f7fa;
+    border: 1px solid #007bff;
+    margin: 5px;
+    cursor: move;
+}
+
+.option {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
     cursor: pointer;
-    border-radius: 0.8vw;
-    border: 0.2vw solid #42a5f5;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    display: inline-block;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
 }
 
 .footer {
@@ -273,4 +289,17 @@ span[draggable], .option {
     padding: 2vw;
     border-radius: 1vw;
     margin-top: 2vh;
+}
+
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 2vw;
+    border-radius: 1vw;
+    box-shadow: 0 0 2vw rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
 }
