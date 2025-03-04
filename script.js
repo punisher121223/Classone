@@ -27,129 +27,145 @@ function checkMedals(score) {
 
 const cheerSound = new Audio("assets/cheer.mp3");
 
-// داده‌های دروس
-const lessons = {
-    "نگارش": {
-        "نگاره‌ها": {
-            "نگاره ۱ - سلام": generateExercises("سلام", ["سلام", "آب", "آبی"], "آ"),
-            "نگاره ۲ - سلام بهار": generateExercises("بهار", ["بهار", "اسب", "ابر"], "ب"),
-            "نگاره ۳ - خانواده": generateExercises("خانواده", ["بابا", "مادر", "خانه"], "م"),
-            "نگاره ۴ - دوستان": generateExercises("دوستان", ["دوست", "دست", "درس"], "د"),
-            "نگاره ۵ - غذا": generateExercises("غذا", ["نان", "ناهار", "نو"], "ن"),
-            "نگاره ۶ - دوستان من": generateExercises("دوستان من", ["دوست", "دویدن", "دریا"], "و"),
-            "نگاره ۷ - مدرسه": generateExercises("مدرسه", ["مدرسه", "مداد", "میز"], "س"),
-            "نگاره ۸ - کتاب من": generateExercises("کتاب من", ["کتاب", "کیف", "کارد"], "ک"),
-            "نگاره ۹ - طبیعت": generateExercises("طبیعت", ["خورشید", "خاک", "خه"], "خ"),
-            "نگاره ۱۰ - پرندگان": generateExercises("پرندگان", ["پرنده", "پرواز", "پر"], "پ")
-        },
-        "نشانه‌ها": {
-            "نشانه اَ": generateExercises("اَ", ["اَناناس", "اَسب", "اَبر"], "اَ"),
-            "نشانه ب": generateExercises("ب", ["بابا", "بازی", "برگ"], "ب"),
-            "نشانه پ": generateExercises("پ", ["پرنده", "پنجره", "پدر"], "پ"),
-            "نشانه ت": generateExercises("ت", ["توپ", "تیر", "تخت"], "ت"),
-            "نشانه ث": generateExercises("ث", ["ثانیه", "ثمر", "ثابت"], "ث"),
-            "نشانه ج": generateExercises("ج", ["جوجه", "جاده", "جنگل"], "ج"),
-            "نشانه چ": generateExercises("چ", ["چای", "چمن", "چشم"], "چ"),
-            "نشانه ح": generateExercises("ح", ["حیوان", "حلقه", "حرف"], "ح"),
-            "نشانه خ": generateExercises("خ", ["خورشید", "خاک", "خانه"], "خ"),
-            "نشانه د": generateExercises("د", ["دوست", "دست", "در"], "د"),
-            "نشانه ذ": generateExercises("ذ", ["ذرت", "ذهن", "ذوق"], "ذ"),
-            "نشانه ر": generateExercises("ر", ["رنگ", "رود", "روز"], "ر"),
-            "نشانه ز": generateExercises("ز", ["زنگ", "زرد", "زمستان"], "ز"),
-            "نشانه ژ": generateExercises("ژ", ["ژاله", "ژست", "ژرف"], "ژ"),
-            "نشانه س": generateExercises("س", ["سگ", "سیب", "سفر"], "س"),
-            "نشانه ش": generateExercises("ش", ["شیر", "شمع", "شب"], "ش"),
-            "نشانه ص": generateExercises("ص", ["صابون", "صبح", "صدا"], "ص"),
-            "نشانه ض": generateExercises("ض", ["ضرب", "ضعیف", "ضخیم"], "ض"),
-            "نشانه ط": generateExercises("ط", ["طوطی", "طلا", "طبیعت"], "ط"),
-            "نشانه ظ": generateExercises("ظ", ["ظرف", "ظهر", "ظلم"], "ظ"),
-            "نشانه ع": generateExercises("ع", ["عمو", "عسل", "عید"], "ع"),
-            "نشانه غ": generateExercises("غ", ["غروب", "غذا", "غبار"], "غ"),
-            "نشانه ف": generateExercises("ف", ["فیل", "فنجان", "فرش"], "ف"),
-            "نشانه ق": generateExercises("ق", ["قاشق", "قفس", "قلم"], "ق"),
-            "نشانه ک": generateExercises("ک", ["کتاب", "کیف", "کوه"], "ک"),
-            "نشانه گ": generateExercises("گ", ["گنجشک", "گل", "گاو"], "گ"),
-            "نشانه ل": generateExercises("ل", ["لاله", "لیوان", "لب"], "ل"),
-            "نشانه م": generateExercises("م", ["مادر", "ماهی", "میز"], "م"),
-            "نشانه ن": generateExercises("ن", ["نان", "نور", "نقشه"], "ن"),
-            "نشانه و": generateExercises("و", ["ورزش", "وارد", "وقت"], "و"),
-            "نشانه ه": generateExercises("ه", ["هواپیما", "هدیه", "هفت"], "ه"),
-            "نشانه ی": generateExercises("ی", ["یاد", "یار", "یلدا"], "ی")
-        }
-    },
-    "ریاضی": {
-        "تم ۱ - شمارش": [
-            `تمرین: تعداد سیب‌ها را بشمار 🍎🍎🍎
-            <div class="option" onclick="checkAnswer(this, '۳')">۳</div>
-            <div class="option" onclick="checkAnswer(this, '۲')">۲</div>`
-        ],
-        "تم ۲ - جمع": [
-            `تمرین: ۲ + ۳ = ? ➕
-            <div class="option" onclick="checkAnswer(this, '۵')">۵</div>
-            <div class="option" onclick="checkAnswer(this, '۴')">۴</div>`
-        ]
-        // بقیه تم‌های ریاضی بدون تغییر
-    },
-    "علوم": {
-        "درس ۱ - طبیعت": [
-            `تمرین: کدام حیوان پرنده است؟ 🐦
-            <div class="option" onclick="checkAnswer(this, 'پرنده')">پرنده</div>
-            <div class="option" onclick="checkAnswer(this, 'گربه')">گربه</div>`
-        ]
-    },
-    "بازی": {
-        "بازی ۱ - شمارش": [
-            `بازی: سیب‌ها را بشمار 🍎🍎🍎
-            <div class="option" onclick="checkAnswer(this, '۳')">۳</div>
-            <div class="option" onclick="checkAnswer(this, '۲')">۲</div>`
-        ]
-    }
+// بانک کلمات (برای همه نشانه‌ها گسترش بده)
+const wordBank = {
+    "اَ": [
+        { word: "اَناناس", parts: ["اَ", "نا", "ناس"] },
+        { word: "اَسب", parts: ["اَس", "ب"] },
+        { word: "اَبر", parts: ["اَ", "بر"] },
+        { word: "اَردک", parts: ["اَر", "دک"] },
+        { word: "اَفتاب", parts: ["اَف", "تاب"] }
+    ],
+    "ب": [
+        { word: "بابا", parts: ["با", "با"] },
+        { word: "بازی", parts: ["با", "زی"] },
+        { word: "برگ", parts: ["بر", "گ"] },
+        { word: "باد", parts: ["باد"] },
+        { word: "باران", parts: ["با", "ران"] }
+    ],
+    "پ": [
+        { word: "پرنده", parts: ["پر", "نده"] },
+        { word: "پنجره", parts: ["پن", "جره"] },
+        { word: "پدر", parts: ["پ", "در"] }
+    ],
+    // برای بقیه نشانه‌ها (مثل "ت"، "ث" و غیره) خودت ادامه بده
 };
 
-// تولید ۱۰۰ تمرین برای هر نگاره یا نشانه
-function generateExercises(topic, words, keySound) {
-    const exercises = [];
-    const sections = ["بخش‌بندی", "انتخاب کلمه", "پیدا کردن صدا", "جمله‌سازی", "تمرین تصویری"];
-    const emojis = ["✍️", "✅", "🎵", "📝", "🖼️"];
+// توابع کمکی برای تمرین‌ساز
+function shuffleArray(array) {
+    return array.sort(() => 0.5 - Math.random());
+}
 
-    sections.forEach((section, sIndex) => {
-        for (let i = 0; i < 20; i++) {
-            const word = words[i % words.length];
-            let exercise = "";
-            switch (section) {
-                case "بخش‌بندی":
-                    const parts = word.match(/.{1,2}/g) || [word];
-                    exercise = `تمرین ${i + 1}: "${word}" را بخش کن ${emojis[sIndex]}
-                        ${parts.map(part => `<div class="dropzone" data-correct="${part}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`).join("")}
-                        ${parts.map(part => `<span draggable="true" ondragstart="drag(event)">${part}</span>`).join("")}`;
-                    break;
-                case "انتخاب کلمه":
-                    const wrongWord = words[(i + 1) % words.length].split("").sort(() => 0.5 - Math.random()).join("");
-                    exercise = `تمرین ${i + 1}: کدام کلمه درست است؟ ${emojis[sIndex]}
-                        <div class="option" onclick="checkAnswer(this, '${word}')">${word}</div>
-                        <div class="option" onclick="checkAnswer(this, '${wrongWord}')">${wrongWord}</div>`;
-                    break;
-                case "پیدا کردن صدا":
-                    const wrongSound = ["ب", "د", "م", "ن", "س", "ر", "ز"][i % 7];
-                    exercise = `تمرین ${i + 1}: صدای "${keySound}" را پیدا کن ${emojis[sIndex]}
-                        <div class="option" onclick="checkAnswer(this, '${keySound}')">${keySound}</div>
-                        <div class="option" onclick="checkAnswer(this, '${wrongSound}')">${wrongSound}</div>`;
-                    break;
-                case "جمله‌سازی":
-                    exercise = `تمرین ${i + 1}: با "${word}" جمله بساز ${emojis[sIndex]}
-                        <div class="option" onclick="checkAnswer(this, '${word} خوب است')">${word} خوب است</div>
-                        <div class="option" onclick="checkAnswer(this, 'غلط')">غلط</div>`;
-                    break;
-                case "تمرین تصویری":
-                    exercise = `تمرین ${i + 1}: کلمه "${word}" را با تصویر تطبیق بده ${emojis[sIndex]}
-                        <div class="option" onclick="checkAnswer(this, '${word}')">${word}</div>
-                        <div class="option" onclick="checkAnswer(this, '${words[(i + 1) % words.length]}')">${words[(i + 1) % words.length]}</div>`;
-                    break;
-            }
-            exercises.push(exercise);
+function generateWrongWord(word) {
+    const letters = word.split("");
+    return shuffleArray(letters).join("");
+}
+
+function getRandomSound(exclude) {
+    const sounds = ["اَ", "ب", "پ", "ت", "ث", "ج", "چ", "ح", "خ", "د", "ذ", "ر", "ز", "ژ", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ک", "گ", "ل", "م", "ن", "و", "ه", "ی"];
+    const filtered = sounds.filter(s => s !== exclude);
+    return filtered[Math.floor(Math.random() * filtered.length)];
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData("text", event.target.textContent);
+}
+
+function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const dropzone = event.target;
+    if (dropzone.classList.contains("dropzone") && !dropzone.textContent) {
+        if (dropzone.dataset.correct === data) {
+            dropzone.textContent = data;
+            dropzone.style.backgroundColor = "#ccffcc";
+            checkDragAndDropComplete();
+        } else {
+            showAlert("غلط است، دوباره تلاش کن! 😔");
         }
-    });
-    return exercises;
+    }
+}
+
+function checkDragAndDropComplete() {
+    const dropzones = document.querySelectorAll(".dropzone");
+    const allCorrect = Array.from(dropzones).every(zone => zone.textContent === zone.dataset.correct);
+    if (allCorrect) {
+        cheerSound.play();
+        updateScore(5);
+        showAlert("درست است! 🌟", generateNewExercise);
+    }
+}
+
+// تابع تولید تمرین
+function generateExercise(type, sign) {
+    const words = wordBank[sign];
+    if (!words || words.length === 0) return "<p>کلماتی برای این نشانه وجود ندارد.</p>";
+    const randomWordObj = words[Math.floor(Math.random() * words.length)];
+    const word = randomWordObj.word;
+    const parts = randomWordObj.parts;
+
+    let exercise = "";
+    switch (type) {
+        case "بخش‌بندی":
+            exercise = `
+                <p>تمرین: "${word}" را بخش کن ✍️</p>
+                <div class="exercise-container">
+                    ${parts.map(part => `
+                        <div class="dropzone" data-correct="${part}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    `).join("")}
+                </div>
+                <div class="parts-container">
+                    ${shuffleArray([...parts]).map(part => `
+                        <span class="draggable" draggable="true" ondragstart="drag(event)">${part}</span>
+                    `).join("")}
+                </div>
+            `;
+            break;
+        case "انتخاب کلمه":
+            const wrongWord = generateWrongWord(word);
+            exercise = `
+                <p>تمرین: کدام کلمه درست است؟ ✅</p>
+                <div class="exercise-container">
+                    <div class="option" onclick="checkAnswer(this, '${word}')">${word}</div>
+                    <div class="option" onclick="checkAnswer(this, '${wrongWord}')">${wrongWord}</div>
+                </div>
+            `;
+            break;
+        case "پیدا کردن صدا":
+            const wrongSound = getRandomSound(sign);
+            exercise = `
+                <p>تمرین: صدای "${sign}" را پیدا کن 🎵</p>
+                <div class="exercise-container">
+                    <div class="option" onclick="checkAnswer(this, '${sign}')">${sign}</div>
+                    <div class="option" onclick="checkAnswer(this, '${wrongSound}')">${wrongSound}</div>
+                </div>
+            `;
+            break;
+        case "جمله‌سازی":
+            exercise = `
+                <p>تمرین: با "${word}" جمله بساز 📝</p>
+                <div class="exercise-container">
+                    <div class="option" onclick="checkAnswer(this, '${word} خوب است')">${word} خوب است</div>
+                    <div class="option" onclick="checkAnswer(this, 'غلط')">غلط</div>
+                </div>
+            `;
+            break;
+        case "تمرین تصویری":
+            const anotherWord = words.filter(w => w.word !== word)[Math.floor(Math.random() * (words.length - 1))].word;
+            exercise = `
+                <p>تمرین: کلمه "${word}" را با تصویر تطبیق بده 🖼️</p>
+                <div class="exercise-container">
+                    <div class="option" onclick="checkAnswer(this, '${word}')">${word}</div>
+                    <div class="option" onclick="checkAnswer(this, '${anotherWord}')">${anotherWord}</div>
+                </div>
+            `;
+            break;
+    }
+    return exercise;
 }
 
 // ثبت‌نام و ورود
@@ -193,7 +209,13 @@ if (protectedPages.some(page => window.location.pathname.includes(page)) && !loc
 function showSubLessons(lesson) {
     const subLessonsDiv = document.getElementById("subLessons");
     subLessonsDiv.innerHTML = '<button onclick="this.parentElement.innerHTML=\'\';document.getElementById(\'topics\').innerHTML=\'\'">برگشت به دروس 📚</button>';
-    Object.keys(lessons[lesson]).forEach(subLesson => {
+    const subLessons = {
+        "نگارش": ["نگاره‌ها", "نشانه‌ها"],
+        "ریاضی": ["تم ۱ - شمارش", "تم ۲ - جمع"],
+        "علوم": ["درس ۱ - طبیعت"],
+        "بازی": ["بازی ۱ - شمارش"]
+    };
+    subLessons[lesson].forEach(subLesson => {
         const btn = document.createElement("button");
         btn.textContent = subLesson;
         btn.onclick = () => showTopics(lesson, subLesson);
@@ -205,17 +227,24 @@ function showSubLessons(lesson) {
 function showTopics(lesson, subLesson) {
     const topicsDiv = document.getElementById("topics");
     topicsDiv.innerHTML = '<button onclick="this.parentElement.innerHTML=\'\'">برگشت به زیرمنوها 🔙</button>';
-    Object.keys(lessons[lesson][subLesson]).forEach(topic => {
+    const topics = {
+        "نگاره‌ها": ["نگاره ۱ - سلام", "نگاره ۲ - سلام بهار", "نگاره ۳ - خانواده", "نگاره ۴ - دوستان", "نگاره ۵ - غذا", "نگاره ۶ - دوستان من", "نگاره ۷ - مدرسه", "نگاره ۸ - کتاب من", "نگاره ۹ - طبیعت", "نگاره ۱۰ - پرندگان"],
+        "نشانه‌ها": Object.keys(wordBank).map(sign => `نشانه ${sign}`),
+        "تم ۱ - شمارش": ["تم ۱ - شمارش"],
+        "تم ۲ - جمع": ["تم ۲ - جمع"],
+        "درس ۱ - طبیعت": ["درس ۱ - طبیعت"],
+        "بازی ۱ - شمارش": ["بازی ۱ - شمارش"]
+    };
+    topics[subLesson].forEach(topic => {
         const btn = document.createElement("button");
         btn.textContent = topic;
-        btn.onclick = () => openExerciseWindow(lesson, subLesson, topic, getProgress(lesson, subLesson, topic));
+        btn.onclick = () => openExerciseWindow(lesson, subLesson, topic);
         topicsDiv.appendChild(btn);
     });
-    updateProgressBar(lesson, subLesson, Object.keys(lessons[lesson][subLesson])[0]);
 }
 
 // باز کردن تمرین‌ها
-function openExerciseWindow(lesson, subLesson, topic, index) {
+function openExerciseWindow(lesson, subLesson, topic) {
     const username = localStorage.getItem("loggedIn");
     const package = JSON.parse(localStorage.getItem(`package_${username}`));
     const totalProgress = Object.values(JSON.parse(localStorage.getItem(`progress_${username}`) || "{}"))
@@ -228,7 +257,7 @@ function openExerciseWindow(lesson, subLesson, topic, index) {
         showAlert("تمرین‌های بسته شما به اتمام رسید! برای ادامه بسته جدید بخرید.", () => window.location.href = "./payment.html");
         return;
     }
-    window.open(`exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}&index=${index}`, "_blank", "width=1000,height=600");
+    window.open(`exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}`, "_blank", "width=1000,height=600");
 }
 
 // نمایش تمرین
@@ -237,115 +266,53 @@ if (window.location.pathname.includes("exercise.html")) {
     const lesson = decodeURIComponent(urlParams.get("lesson"));
     const subLesson = decodeURIComponent(urlParams.get("subLesson"));
     const topic = decodeURIComponent(urlParams.get("topic"));
-    const index = parseInt(urlParams.get("index") || "0");
-    showExercise(lesson, subLesson, topic, index);
-}
-
-function showExercise(lesson, subLesson, topic, index) {
+    const sign = topic.replace("نشانه ", "");
     const exerciseDiv = document.getElementById("exercise-panel");
-    if (!lessons[lesson] || !lessons[lesson][subLesson] || !lessons[lesson][subLesson][topic] || index >= lessons[lesson][subLesson][topic].length) {
-        exerciseDiv.innerHTML = "<p>تمرین‌ها تمام شد! 🎉</p>";
-        setTimeout(() => window.close(), 2000);
-        return;
+    const type = ["بخش‌بندی", "انتخاب کلمه", "پیدا کردن صدا", "جمله‌سازی", "تمرین تصویری"][Math.floor(Math.random() * 5)];
+    if (subLesson === "نشانه‌ها") {
+        exerciseDiv.innerHTML = generateExercise(type, sign);
+    } else {
+        exerciseDiv.innerHTML = "<p>این بخش هنوز پیاده‌سازی نشده است.</p>"; // برای نگاره‌ها و بقیه
     }
-    exerciseDiv.innerHTML = lessons[lesson][subLesson][topic][index];
-    saveProgress(lesson, subLesson, topic, index);
 }
 
-// مدیریت پیشرفت
-function saveProgress(lesson, subLesson, topic, index) {
+// مدیریت پیشرفت (برای سازگاری با سیستم قدیم)
+function saveProgress(lesson, subLesson, topic) {
     const username = localStorage.getItem("loggedIn");
     const progress = JSON.parse(localStorage.getItem(`progress_${username}`) || "{}");
     progress[lesson] = progress[lesson] || {};
     progress[lesson][subLesson] = progress[lesson][subLesson] || {};
-    progress[lesson][subLesson][topic] = index + 1;
+    progress[lesson][subLesson][topic] = (progress[lesson][subLesson][topic] || 0) + 1;
     localStorage.setItem(`progress_${username}`, JSON.stringify(progress));
-}
-
-function getProgress(lesson, subLesson, topic) {
-    const username = localStorage.getItem("loggedIn");
-    const progress = JSON.parse(localStorage.getItem(`progress_${username}`) || "{}");
-    return progress[lesson]?.[subLesson]?.[topic] || 0;
-}
-
-function updateProgressBar(lesson, subLesson, topic) {
-    const progress = getProgress(lesson, subLesson, topic);
-    const total = lessons[lesson][subLesson][topic].length;
-    const percentage = Math.min((progress / total) * 100, 100);
-    const progressFill = document.getElementById("progressFill");
-    if (progressFill) progressFill.style.width = `${percentage}%`;
 }
 
 // بررسی پاسخ‌ها
 function checkAnswer(element, correctAnswer) {
     const userAnswer = element.textContent.trim();
-    const urlParams = new URLSearchParams(window.location.search);
-    const lesson = decodeURIComponent(urlParams.get("lesson"));
-    const subLesson = decodeURIComponent(urlParams.get("subLesson"));
-    const topic = decodeURIComponent(urlParams.get("topic"));
-    const index = parseInt(urlParams.get("index"));
-    
     if (userAnswer === correctAnswer) {
         cheerSound.play();
         updateScore(5);
-        showAlert("درست است! 🌟", () => {
-            window.location.href = `exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}&index=${index + 1}`;
-        });
-        setTimeout(() => {
-            window.location.href = `exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}&index=${index + 1}`;
-        }, 1500);
+        const urlParams = new URLSearchParams(window.location.search);
+        const lesson = decodeURIComponent(urlParams.get("lesson"));
+        const subLesson = decodeURIComponent(urlParams.get("subLesson"));
+        const topic = decodeURIComponent(urlParams.get("topic"));
+        saveProgress(lesson, subLesson, topic);
+        showAlert("درست است! 🌟", generateNewExercise);
     } else {
         showAlert("غلط است، دوباره تلاش کن! 😔");
         element.style.backgroundColor = "#ffcccc";
     }
 }
 
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.textContent);
-}
-
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const correctAnswer = event.target.getAttribute("data-correct");
-    const draggedElement = document.createElement("span");
-    draggedElement.textContent = data;
-    draggedElement.draggable = true;
-    draggedElement.ondragstart = drag;
-    event.target.appendChild(draggedElement);
-
+function generateNewExercise() {
     const urlParams = new URLSearchParams(window.location.search);
     const lesson = decodeURIComponent(urlParams.get("lesson"));
     const subLesson = decodeURIComponent(urlParams.get("subLesson"));
     const topic = decodeURIComponent(urlParams.get("topic"));
-    const index = parseInt(urlParams.get("index"));
-    const dropzones = document.querySelectorAll(".dropzone");
-    const allCorrect = Array.from(dropzones).every(zone => {
-        const dropped = Array.from(zone.children).map(child => child.textContent).join("");
-        return dropped === zone.getAttribute("data-correct");
-    });
-
-    if (allCorrect && dropzones.length === document.querySelectorAll(".dropzone span").length) {
-        cheerSound.play();
-        updateScore(5);
-        showAlert("درست است! 🌟", () => {
-            window.location.href = `exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}&index=${index + 1}`;
-        });
-        setTimeout(() => {
-            window.location.href = `exercise.html?lesson=${encodeURIComponent(lesson)}&subLesson=${encodeURIComponent(subLesson)}&topic=${encodeURIComponent(topic)}&index=${index + 1}`;
-        }, 1500);
-    } else if (dropzones.length === document.querySelectorAll(".dropzone span").length) {
-        showAlert("غلط است، دوباره تلاش کن! 😔");
-        dropzones.forEach(zone => {
-            if (Array.from(zone.children).map(child => child.textContent).join("") !== zone.getAttribute("data-correct")) {
-                zone.style.backgroundColor = "#ffcccc";
-            }
-        });
-    }
+    const sign = topic.replace("نشانه ", "");
+    const exerciseDiv = document.getElementById("exercise-panel");
+    const type = ["بخش‌بندی", "انتخاب کلمه", "پیدا کردن صدا", "جمله‌سازی", "تمرین تصویری"][Math.floor(Math.random() * 5)];
+    exerciseDiv.innerHTML = generateExercise(type, sign);
 }
 
 // نمایش اعلان
