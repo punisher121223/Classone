@@ -161,7 +161,6 @@ button:hover {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
-/* استایل‌های جدید برای تمرین‌ساز */
 .exercise-container {
     display: flex;
     gap: 10px;
@@ -300,6 +299,6 @@ button:hover {
     padding: 2vw;
     border-radius: 1vw;
     box-shadow: 0 0 2vw rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    zIndex: 1000;
     text-align: center;
 }
