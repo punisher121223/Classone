@@ -363,6 +363,7 @@ function getDecodedData() {
 // تابع برای چک کردن وضعیت ورود
 function isLoggedIn() {
     const loggedInUser = localStorage.getItem("loggedIn");
+    console.log("[DEBUG] Checking loggedIn:", loggedInUser); // دیباگ
     return loggedInUser && loggedInUser.trim() !== "";
 }
 
@@ -531,7 +532,7 @@ document.getElementById("registerForm")?.addEventListener("submit", (e) => {
     localStorage.setItem(`progress_${username}`, JSON.stringify({}));
     localStorage.setItem(`package_${username}`, JSON.stringify({ name: "رایگان", exercises: 15, expiry: null }));
     localStorage.setItem(`score_${username}`, "0");
-    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈", () => window.location.href = "./login.html");
+    showAlert("ثبت‌نام موفق! حالا وارد شوید 🌈", () => window.location.href = "./index.html");
 });
 
 document.getElementById("loginForm")?.addEventListener("submit", (e) => {
@@ -540,18 +541,20 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
     const password = document.getElementById("password").value;
     const storedPass = localStorage.getItem(`user_${username}`);
     if (storedPass && btoa(password) === storedPass) {
+        console.log("[DEBUG] Login successful, setting loggedIn:", username); // دیباگ
         localStorage.setItem("loggedIn", username);
         if (username === "alireza" && password === "12122312") {
             localStorage.setItem("isAdmin", "true");
         }
-        // مطمئن می‌شیم که بعد از لاگین به دروس هدایت بشه
+        // یه تأخیر کوتاه برای اطمینان از ذخیره‌سازی
         setTimeout(() => {
+            console.log("[DEBUG] After setTimeout, loggedIn:", localStorage.getItem("loggedIn")); // دیباگ
             if (isLoggedIn()) {
                 window.location.href = "./lessons.html";
             } else {
                 showAlert("خطایی رخ داد، دوباره تلاش کنید 😔");
             }
-        }, 100);
+        }, 50);
     } else {
         showAlert("نام کاربری یا رمز عبور اشتباه است 😔");
     }
@@ -559,11 +562,16 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
 
 // محافظت از صفحات
 const protectedPages = ["lessons.html", "profile.html", "payment.html", "vocabulary.html", "exercise.html"];
-if (protectedPages.some(page => window.location.pathname.includes(page))) {
-    if (!isLoggedIn()) {
-        window.location.href = "./login.html";
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("[DEBUG] DOMContentLoaded, checking protected page"); // دیباگ
+    if (protectedPages.some(page => window.location.pathname.includes(page))) {
+        console.log("[DEBUG] On protected page, loggedIn:", localStorage.getItem("loggedIn")); // دیباگ
+        if (!isLoggedIn()) {
+            console.log("[DEBUG] Not logged in, redirecting to login.html"); // دیباگ
+            window.location.href = "./index.html";
+        }
     }
-}
+});
 
 // نمایش زیرمنوهای درس
 function showSubLessons(lesson) {
@@ -909,7 +917,7 @@ function goToTelegram(packageName, packageDetails) {
 function logout() {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("isAdmin");
-    window.location.href = "./login.html";
+    window.location.href = "./index.html";
 }
 
 // حالت شب (اختیاری)
