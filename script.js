@@ -363,7 +363,7 @@ function getDecodedData() {
 // تابع برای چک کردن وضعیت ورود
 function isLoggedIn() {
     const loggedInUser = localStorage.getItem("loggedIn");
-    console.log("[DEBUG] Checking loggedIn:", loggedInUser); // دیباگ
+    console.log("[DEBUG] Checking loggedIn in isLoggedIn():", loggedInUser);
     return loggedInUser && loggedInUser.trim() !== "";
 }
 
@@ -540,22 +540,19 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
     const storedPass = localStorage.getItem(`user_${username}`);
+    console.log("[DEBUG] Attempting login for username:", username);
+    console.log("[DEBUG] Stored password (encoded):", storedPass);
+    console.log("[DEBUG] Entered password (encoded):", btoa(password));
     if (storedPass && btoa(password) === storedPass) {
-        console.log("[DEBUG] Login successful, setting loggedIn:", username); // دیباگ
+        console.log("[DEBUG] Login successful, setting loggedIn:", username);
         localStorage.setItem("loggedIn", username);
         if (username === "alireza" && password === "12122312") {
             localStorage.setItem("isAdmin", "true");
         }
-        // یه تأخیر کوتاه برای اطمینان از ذخیره‌سازی
-        setTimeout(() => {
-            console.log("[DEBUG] After setTimeout, loggedIn:", localStorage.getItem("loggedIn")); // دیباگ
-            if (isLoggedIn()) {
-                window.location.href = "./lessons.html";
-            } else {
-                showAlert("خطایی رخ داد، دوباره تلاش کنید 😔");
-            }
-        }, 50);
+        console.log("[DEBUG] loggedIn set to:", localStorage.getItem("loggedIn"));
+        window.location.href = "./lessons.html";
     } else {
+        console.log("[DEBUG] Login failed: Incorrect username or password");
         showAlert("نام کاربری یا رمز عبور اشتباه است 😔");
     }
 });
@@ -563,13 +560,20 @@ document.getElementById("loginForm")?.addEventListener("submit", (e) => {
 // محافظت از صفحات
 const protectedPages = ["lessons.html", "profile.html", "payment.html", "vocabulary.html", "exercise.html"];
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("[DEBUG] DOMContentLoaded, checking protected page"); // دیباگ
+    console.log("[DEBUG] DOMContentLoaded, current path:", window.location.pathname);
     if (protectedPages.some(page => window.location.pathname.includes(page))) {
-        console.log("[DEBUG] On protected page, loggedIn:", localStorage.getItem("loggedIn")); // دیباگ
-        if (!isLoggedIn()) {
-            console.log("[DEBUG] Not logged in, redirecting to login.html"); // دیباگ
+        console.log("[DEBUG] On protected page, checking loggedIn...");
+        const loggedInStatus = isLoggedIn();
+        console.log("[DEBUG] isLoggedIn() returned:", loggedInStatus);
+        if (!loggedInStatus) {
+            console.log("[DEBUG] Not logged in, redirecting to login.html");
             window.location.href = "./index.html";
+        } else {
+            console.log("[DEBUG] User is logged in, staying on page");
         }
+    } else if (window.location.pathname.includes("index.html") && isLoggedIn()) {
+        console.log("[DEBUG] Already logged in, redirecting to lessons.html");
+        window.location.href = "./lessons.html";
     }
 });
 
